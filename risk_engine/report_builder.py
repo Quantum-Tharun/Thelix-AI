@@ -190,7 +190,15 @@ class ReportBuilder:
             {"check": c, "status": "failed", "reason": "Check execution failed or provider timed out"}
             for c in coverage.failed_checks
         ] + [
-            {"check": c, "status": "skipped", "reason": "Check was not requested or prerequisites not met"}
+            {
+                "check": c,
+                "status": "skipped",
+                "reason": (
+                    "External threat reputation feeds (Google Safe Browsing, VirusTotal) unconfigured. Evaluated strictly using local heuristic engine."
+                    if c == "external_threat_intelligence"
+                    else "Check was not requested or prerequisites not met"
+                ),
+            }
             for c in coverage.skipped_checks
         ]
         if coverage.limitations:

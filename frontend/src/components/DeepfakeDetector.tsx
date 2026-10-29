@@ -76,7 +76,8 @@ export const DeepfakeDetector: React.FC<DeepfakeDetectorProps> = ({ health }) =>
     }
   };
 
-  const isModelReady = health?.deepfake_status !== 'prototype_weights_unloaded';
+  const isModelReady = health?.deepfake_status === 'ready';
+  const isModelInvalid = health?.deepfake_status === 'invalid_weights';
 
   return (
     <div className="deepfake-detector-container">
@@ -90,8 +91,14 @@ export const DeepfakeDetector: React.FC<DeepfakeDetectorProps> = ({ health }) =>
         </div>
 
         <div className="model-state-badge">
-          <span className={`status-dot ${isModelReady ? 'online' : 'warning'}`}></span>
-          <span>{isModelReady ? 'Model Ready' : 'Prototype (Weights Unloaded)'}</span>
+          <span className={`status-dot ${isModelReady ? 'online' : isModelInvalid ? 'error' : 'warning'}`}></span>
+          <span>
+            {isModelReady
+              ? 'Model Active (Weights Loaded)'
+              : isModelInvalid
+              ? 'Model Error (Invalid Weights)'
+              : 'Prototype (Weights Unloaded)'}
+          </span>
         </div>
       </div>
 

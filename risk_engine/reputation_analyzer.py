@@ -206,11 +206,11 @@ class GoogleSafeBrowsingProvider(ReputationProvider):
         cache: Optional[ReputationCache] = None,
     ):
         super().__init__(cache=cache)
-        self.api_key = api_key
+        self.api_key = api_key or ""
         self.timeout_seconds = timeout_seconds
 
     async def _execute_lookup(self, sanitized_url: str) -> ReputationResult:
-        if not self.api_key:
+        if not self.api_key or not self.api_key.strip():
             return ReputationResult(
                 provider_name=self.name,
                 provider_version=self.version,
@@ -218,7 +218,7 @@ class GoogleSafeBrowsingProvider(ReputationProvider):
                 error_message="Google Safe Browsing API key unconfigured",
             )
 
-        endpoint = f"https://safebrowsing.googleapis.com/v4/threatMatches:find?key={self.api_key}"
+        endpoint = f"https://safebrowsing.googleapis.com/v4/threatMatches:find?key={self.api_key.strip()}"
         payload = {
             "client": {"clientId": "thelix-ai", "clientVersion": "1.0.0"},
             "threatInfo": {
@@ -239,11 +239,26 @@ class GoogleSafeBrowsingProvider(ReputationProvider):
                         status=ReputationStatus.RATE_LIMITED,
                         error_message="Google Safe Browsing API quota exceeded (HTTP 429)",
                     )
+                if resp.status_code in (400, 401, 403):
+                    return ReputationResult(
+                        provider_name=self.name,
+                        provider_version=self.version,
+                        status=ReputationStatus.UNAVAILABLE,
+                        error_message=f"Google Safe Browsing API authentication error (HTTP {resp.status_code})",
+                    )
                 resp.raise_for_status()
                 data = resp.json()
 
+            if not isinstance(data, dict):
+                return ReputationResult(
+                    provider_name=self.name,
+                    provider_version=self.version,
+                    status=ReputationStatus.INVALID_RESPONSE,
+                    error_message="Google Safe Browsing returned a non-dict payload",
+                )
+
             matches = data.get("matches", [])
-            threats = [m.get("threatType", "MALWARE") for m in matches]
+            threats = [m.get("threatType", "MALWARE") for m in matches if isinstance(m, dict)]
             is_match = len(matches) > 0
 
             return ReputationResult(
@@ -263,8 +278,10 @@ class GoogleSafeBrowsingProvider(ReputationProvider):
                 error_message="Google Safe Browsing query timed out",
             )
         except Exception as e:
-            # Mask API key from error message
-            safe_err = re.sub(r"key=[A-Za-z0-9_\-]+", "key=REDACTED", str(e))
+            raw_err = str(e)
+            safe_err = re.sub(r"key=[^&\s]+", "key=[REDACTED]", raw_err)
+            if self.api_key and self.api_key in safe_err:
+                safe_err = safe_err.replace(self.api_key, "[REDACTED]")
             logger.warning(f"Google Safe Browsing query failed: {safe_err}")
             return ReputationResult(
                 provider_name=self.name,
@@ -286,11 +303,11 @@ class VirusTotalProvider(ReputationProvider):
         cache: Optional[ReputationCache] = None,
     ):
         super().__init__(cache=cache)
-        self.api_key = api_key
+        self.api_key = api_key or ""
         self.timeout_seconds = timeout_seconds
 
     async def _execute_lookup(self, sanitized_url: str) -> ReputationResult:
-        if not self.api_key:
+        if not self.api_key or not self.api_key.strip():
             return ReputationResult(
                 provider_name=self.name,
                 provider_version=self.version,
@@ -300,7 +317,10 @@ class VirusTotalProvider(ReputationProvider):
 
         url_id = base64.urlsafe_b64encode(sanitized_url.encode()).decode().strip("=")
         endpoint = f"https://www.virustotal.com/api/v3/urls/{url_id}"
-        headers = {"x-apikey": self.api_key}
+        headers = {
+            "x-apikey": self.api_key.strip(),
+            "Accept": "application/json",
+        }
 
         try:
             async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
@@ -313,6 +333,13 @@ class VirusTotalProvider(ReputationProvider):
                         status=ReputationStatus.NO_MATCH,
                         error_message="URL not found in VirusTotal database (unseen)",
                     )
+                if resp.status_code in (401, 403):
+                    return ReputationResult(
+                        provider_name=self.name,
+                        provider_version=self.version,
+                        status=ReputationStatus.UNAVAILABLE,
+                        error_message=f"VirusTotal API authentication error (HTTP {resp.status_code})",
+                    )
                 if resp.status_code == 429:
                     return ReputationResult(
                         provider_name=self.name,
@@ -323,10 +350,21 @@ class VirusTotalProvider(ReputationProvider):
                 resp.raise_for_status()
                 data = resp.json()
 
+            if not isinstance(data, dict):
+                return ReputationResult(
+                    provider_name=self.name,
+                    provider_version=self.version,
+                    status=ReputationStatus.INVALID_RESPONSE,
+                    error_message="VirusTotal returned a non-dict payload",
+                )
+
             stats = data.get("data", {}).get("attributes", {}).get("last_analysis_stats", {})
+            if not isinstance(stats, dict):
+                stats = {}
+
             malicious = stats.get("malicious", 0)
             suspicious = stats.get("suspicious", 0)
-            total = sum(stats.values()) if stats else 0
+            total = sum(v for v in stats.values() if isinstance(v, (int, float))) if stats else 0
             positives = malicious + suspicious
 
             if malicious >= 3:
@@ -342,7 +380,7 @@ class VirusTotalProvider(ReputationProvider):
                 status=status,
                 threat_types=["MALWARE_OR_PHISHING"] if positives > 0 else [],
                 positives_count=positives,
-                total_engines=total,
+                total_engines=int(total),
                 raw_response=stats,
             )
         except httpx.TimeoutException:
@@ -353,12 +391,16 @@ class VirusTotalProvider(ReputationProvider):
                 error_message="VirusTotal query timed out",
             )
         except Exception as e:
-            logger.warning(f"VirusTotal query failed: {e}")
+            raw_err = str(e)
+            safe_err = raw_err
+            if self.api_key and self.api_key in safe_err:
+                safe_err = safe_err.replace(self.api_key, "[REDACTED]")
+            logger.warning(f"VirusTotal query failed: {safe_err}")
             return ReputationResult(
                 provider_name=self.name,
                 provider_version=self.version,
                 status=ReputationStatus.UNAVAILABLE,
-                error_message=str(e),
+                error_message=safe_err,
             )
 
 

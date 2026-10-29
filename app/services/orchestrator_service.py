@@ -61,8 +61,34 @@ class OrchestratorService:
         self.context_interpreter = ContextInterpreter(self.llm_provider)
         self.explanation_generator = ExplanationGenerator(self.llm_provider)
         self.sandbox_controller = SandboxController()
-        self.risk_engine = RiskEngine()
-        self.multimodal_orchestrator = MultimodalOrchestrator()
+
+        # Initialize external threat intelligence providers from settings
+        reputation_providers = []
+        from risk_engine.reputation_analyzer import GoogleSafeBrowsingProvider, VirusTotalProvider
+
+        if getattr(settings, "SAFE_BROWSING_API_KEY", "") and settings.SAFE_BROWSING_API_KEY.strip():
+            reputation_providers.append(
+                GoogleSafeBrowsingProvider(
+                    api_key=settings.SAFE_BROWSING_API_KEY.strip(),
+                    timeout_seconds=4.0,
+                )
+            )
+        if getattr(settings, "VIRUSTOTAL_API_KEY", "") and settings.VIRUSTOTAL_API_KEY.strip():
+            reputation_providers.append(
+                VirusTotalProvider(
+                    api_key=settings.VIRUSTOTAL_API_KEY.strip(),
+                    timeout_seconds=5.0,
+                )
+            )
+
+        self.risk_engine = RiskEngine(
+            reputation_providers=reputation_providers if reputation_providers else None,
+            enable_reputation=True,
+        )
+        self.multimodal_orchestrator = MultimodalOrchestrator(
+            reputation_providers=reputation_providers if reputation_providers else None,
+            enable_reputation=True,
+        )
 
     async def execute_url_scan(
         self,
@@ -206,6 +232,7 @@ class OrchestratorService:
                 all_findings.extend(base_report.findings)
                 completed_checks.extend(base_report.checks_completed)
                 failed_checks.extend(base_report.checks_failed)
+                skipped_checks.extend(base_report.checks_skipped)
 
             all_evidence.extend(sb_evidence)
             all_findings.extend(sb_findings)

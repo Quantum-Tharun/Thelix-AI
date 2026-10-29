@@ -162,7 +162,7 @@ cd frontend && npm run build
 ```
 
 **Latest test results:**
-- Backend: **405 passed, 6 skipped** (qrcode module required for QR tests)
+- Backend: **419 passed, 6 skipped** (includes deepfake hardening & threat-intel integration tests)
 - Frontend TypeScript: **0 errors**
 - Frontend build: **✓ successful**
 

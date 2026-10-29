@@ -123,17 +123,26 @@ class RiskEngine:
             logger.error(f"Static analysis failed: {e}")
             failed_checks.append("static_analysis")
 
-        # 3. Reputation Intelligence (if enabled and available)
-        if self.reputation_analyzer:
+        # 3. Reputation Intelligence (if enabled and configured)
+        has_active_providers = bool(self.reputation_analyzer and self.reputation_analyzer.providers)
+        if has_active_providers:
             planned_checks.append("reputation_analysis")
             try:
                 rep_ev, rep_fn, rep_meta = await self.reputation_analyzer.analyze(norm)
                 raw_evidence.extend(rep_ev)
                 raw_findings.extend(rep_fn)
-                completed_checks.append("reputation_analysis")
+
+                # Only report completed if at least one provider was available/queried
+                any_queried = any(meta.get("available") for meta in rep_meta.values()) if rep_meta else False
+                if any_queried:
+                    completed_checks.append("reputation_analysis")
+                else:
+                    failed_checks.append("reputation_analysis")
             except Exception as e:
                 logger.warning(f"Reputation checks failed: {e}")
                 failed_checks.append("reputation_analysis")
+        else:
+            skipped_checks.append("external_threat_intelligence")
 
         # 4. Integrate Additional Evidence (e.g. from Sandbox or OCR)
         if additional_evidence:

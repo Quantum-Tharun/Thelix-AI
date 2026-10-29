@@ -16,6 +16,7 @@ from app.middleware.rate_limiter import RateLimitingMiddleware
 from app.middleware.request_size_limiter import RequestSizeLimiterMiddleware
 from app.database.session import Base, engine, get_db
 from risk_engine.engine import RiskEngine
+from app.ai.deepfake.service import DeepfakeDetectorService
 
 logger = logging.getLogger("thelix.main")
 
@@ -159,7 +160,7 @@ async def readiness_check(db: Session = Depends(get_db)):
         "rate_limit_store": settings.RATE_LIMIT_STORE,
         "ocr_available": ocr_available,
         "qr_available": True,
-        "deepfake_status": "prototype_weights_unloaded",
+        "deepfake_status": DeepfakeDetectorService.get_model_status(),
         "pilot_mode_enabled": settings.PILOT_MODE_ENABLED,
         "providers_configured": provider_status,
     }

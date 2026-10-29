@@ -7,18 +7,14 @@ reports prototype / uncalibrated status when trained production weights are not 
 import io
 import os
 import base64
-import hashlib
 import logging
 from typing import Dict, Any, Optional
 from PIL import Image
 
 from app.schemas.ai_contracts import DeepfakeAnalysisRequest, DeepfakeAnalysisResponse
+from app.ai.deepfake.vision import DeepfakeVisionService
 
 logger = logging.getLogger("thelix.deepfake_service")
-
-# Weights path configuration
-WEIGHTS_PATH = os.environ.get("DEEPFAKE_WEIGHTS_PATH", "ai_engineering/models/deepfake/weights.pth")
-WEIGHTS_AVAILABLE = os.path.isfile(WEIGHTS_PATH)
 
 
 class DeepfakeDetectorService:
@@ -29,6 +25,31 @@ class DeepfakeDetectorService:
     MODEL_VERSION = "thelix-mesonet-v1-prototype"
     MAX_FILE_BYTES = 10 * 1024 * 1024  # 10 MB limit
     MAX_PIXELS = 16_777_216            # 16 MP decompression bomb guard
+
+    @classmethod
+    def get_weights_path(cls) -> str:
+        """Returns the configured or default path to the deepfake model weights checkpoint."""
+        return os.environ.get("DEEPFAKE_WEIGHTS_PATH", "ai_engineering/models/deepfake/weights.pth")
+
+    @classmethod
+    def is_weights_available(cls) -> bool:
+        """Dynamically checks if the model weights file exists on disk."""
+        return os.path.isfile(cls.get_weights_path())
+
+    @classmethod
+    def get_model_status(cls) -> str:
+        """
+        Dynamically reports model readiness for health probes:
+          - 'ready': weights file exists and passes architecture validation
+          - 'prototype_weights_unloaded': weights file does not exist on disk
+          - 'invalid_weights': weights file exists but failed state_dict / architecture validation
+        """
+        weights_path = cls.get_weights_path()
+        if not os.path.isfile(weights_path):
+            return "prototype_weights_unloaded"
+
+        is_valid, _ = DeepfakeVisionService.validate_weights(weights_path)
+        return "ready" if is_valid else "invalid_weights"
 
     @classmethod
     async def analyze_media(
@@ -87,40 +108,57 @@ class DeepfakeDetectorService:
                 processing_notes=str(e),
             )
 
-        # Production model weights verification
-        if not WEIGHTS_AVAILABLE:
-            # Honest, un-fabricated prototype response
+        weights_path = cls.get_weights_path()
+        model_status = cls.get_model_status()
+
+        # Case 1: Weights file missing on disk -> Honest prototype disclosure with setup instructions
+        if model_status == "prototype_weights_unloaded":
             return DeepfakeAnalysisResponse(
                 status="PROTOTYPE_UNAVAILABLE",
                 is_deepfake=None,
                 confidence_score=None,
                 probabilistic_notice=(
                     "Deepfake detection model architecture (PyTorch SimpleDeepfakeCNN) is registered, "
-                    "but production trained model weights (MesoNet/XceptionNet) are not loaded in this environment. "
+                    "but production trained model weights are not loaded in this environment. "
                     "In accordance with security policy, uncalibrated randomized inference is strictly inhibited "
                     "to prevent false trust."
                 ),
                 model_version=cls.MODEL_VERSION,
                 indicators_detected=[
-                    "Image dimensions and byte signature verified",
-                    "Safety decompression check passed",
-                    "No executable macro or script payload detected in image headers",
+                    f"Media integrity verified ({w}x{h} pixels, {len(media_bytes)} bytes)",
+                    "Decompression bomb safety check passed",
+                    "No executable script payload detected in image headers",
                 ],
                 limitations=[
                     "LIMITATION-PRODUCTION-WEIGHTS-UNLOADED",
                     "LIMITATION-PROBABILISTIC-INFERENCE-INHIBITED",
                 ],
                 processing_notes=(
-                    f"Architecture: SimpleDeepfakeCNN; Expected weights: {WEIGHTS_PATH}. "
-                    "To enable live probabilistic scoring, place validated checkpoint at DEEPFAKE_WEIGHTS_PATH."
+                    f"Model architecture: SimpleDeepfakeCNN (2x Conv2d + MaxPool2d + Linear classifier). "
+                    f"Expected weights checkpoint: '{weights_path}'. "
+                    f"Setup instructions: Place a validated PyTorch state_dict matching SimpleDeepfakeCNN "
+                    f"at '{weights_path}' or set the DEEPFAKE_WEIGHTS_PATH environment variable."
                 ),
             )
 
-        # If weights exist, execute real inference
+        # Case 2: Weights file exists but failed validation
+        if model_status == "invalid_weights":
+            _, err_msg = DeepfakeVisionService.validate_weights(weights_path)
+            return DeepfakeAnalysisResponse(
+                status="FAILED",
+                is_deepfake=None,
+                confidence_score=None,
+                probabilistic_notice="Model weights file is corrupted or does not match SimpleDeepfakeCNN layer geometry.",
+                model_version=cls.MODEL_VERSION,
+                indicators_detected=[],
+                limitations=["LIMITATION-INVALID-MODEL-CHECKPOINT"],
+                processing_notes=f"Checkpoint error at '{weights_path}': {err_msg}",
+            )
+
+        # Case 3: Valid weights loaded -> Run real inference
         try:
-            from app.ai.deepfake.vision import DeepfakeVisionService
-            inf_result = await DeepfakeVisionService.analyze_image(clean_b64)
-            is_fake = inf_result.get("is_deepfake", False)
+            inf_result = await DeepfakeVisionService.analyze_image(clean_b64, weights_path=weights_path)
+            is_fake = bool(inf_result.get("is_deepfake", False))
             conf = float(inf_result.get("confidence_score", 0.0))
 
             return DeepfakeAnalysisResponse(
@@ -135,14 +173,17 @@ class DeepfakeDetectorService:
                 indicators_detected=[
                     f"Manipulation probability evaluated at {round(conf * 100, 1)}%",
                     "Spatial boundary and facial frequency artifacts evaluated",
+                    f"Inference executed on device: {DeepfakeVisionService._device}",
                 ],
                 limitations=["LIMITATION-PROBABILISTIC-DETECTOR"],
-                processing_notes="Inference executed against loaded PyTorch weights.",
+                processing_notes=f"Inference successfully executed against loaded PyTorch weights: {weights_path}",
             )
         except Exception as e:
-            logger.error(f"Deepfake inference error: {e}")
+            logger.error(f"Deepfake inference error: {e}", exc_info=True)
             return DeepfakeAnalysisResponse(
                 status="FAILED",
+                is_deepfake=None,
+                confidence_score=None,
                 probabilistic_notice="Model inference execution encountered an internal error.",
                 model_version=cls.MODEL_VERSION,
                 indicators_detected=[],
