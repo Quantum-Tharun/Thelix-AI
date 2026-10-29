@@ -7,9 +7,12 @@ from app.schemas.ai_contracts import (
     BaseUniformResponse,
     ScreenshotAnalysisRequest,
     URLAnalysisRequest,
-    QRAnalysisRequest
+    QRAnalysisRequest,
+    DeepfakeAnalysisRequest,
+    DeepfakeAnalysisResponse,
 )
 from app.ai.gateway.gateway import AIGateway
+from app.ai.deepfake.service import DeepfakeDetectorService
 from app.auth.security import get_service_or_user_id
 from app.database.session import get_db
 
@@ -104,5 +107,29 @@ async def analyze_qr(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="QR analysis failed. Please check audit logs or scan status.",
+        )
+
+
+@router.post("/analyze-deepfake", response_model=DeepfakeAnalysisResponse)
+async def analyze_deepfake(
+    request: DeepfakeAnalysisRequest,
+    caller_id: str = Depends(get_service_or_user_id),
+    db: Session = Depends(get_db),
+):
+    """
+    Analyze an uploaded image or video frame for synthetic manipulation / deepfake indicators.
+    Enforces media bounds, reports honest prototype status when uncalibrated weights are missing,
+    and returns structured probabilistic disclosures.
+    """
+    effective_user_id = resolve_effective_user(caller_id, request.user_id)
+    try:
+        return await DeepfakeDetectorService.analyze_media(request)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error during deepfake analysis: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Deepfake analysis service encountered an error.",
         )
 

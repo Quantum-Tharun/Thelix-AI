@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  /* Brand Color Palette */
+  --thelix-black: #11130f;
+  --thelix-surface-1: #171a15;
+  --thelix-surface-2: #21251e;
+  --thelix-surface-3: #2c3228;
+  --thelix-border: #31372b;
+  --thelix-border-light: #444c3c;
+
+  --thelix-olive: #78845a;
+  --thelix-olive-light: #93a370;
+  --thelix-olive-dark: #5e6845;
+  --thelix-olive-glow: rgba(120, 132, 90, 0.25);
+
+  --thelix-cream: #f5f0e5;
+  --thelix-cream-muted: #c9c3b5;
+  --thelix-cream-subtle: #8e897d;
+
+  /* Semantic Alerts */
+  --thelix-success: #78845a;
+  --thelix-warning: #d99b43;
+  --thelix-danger: #c75647;
+  --thelix-danger-glow: rgba(199, 86, 71, 0.2);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  --transition-smooth: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--thelix-black);
+  color: var(--thelix-cream);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+a {
+  color: var(--thelix-olive-light);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--thelix-cream);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--thelix-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--thelix-surface-3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--thelix-olive);
+}

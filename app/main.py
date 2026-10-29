@@ -121,8 +121,21 @@ async def readiness_check(db: Session = Depends(get_db)):
                 detail="Service unavailable: Distributed rate limit store (Redis) unreachable",
             )
 
+    # Live-probe Ollama availability (non-blocking, 1.5s timeout)
+    ollama_status = "unconfigured"
+    if getattr(settings, "OLLAMA_BASE_URL", None):
+        try:
+            import urllib.request as _ur
+            import urllib.error as _ue
+            _req = _ur.Request(f"{settings.OLLAMA_BASE_URL}/api/tags", method="GET")
+            with _ur.urlopen(_req, timeout=1.5) as _resp:
+                ollama_status = "available" if _resp.status == 200 else "unreachable"
+        except (_ue.URLError, OSError, Exception):
+            ollama_status = "unreachable"
+
     provider_status = {
         "gemini": bool(settings.GEMINI_API_KEY) if settings.LLM_PROVIDER == "gemini" else "mock",
+        "ollama_gemma": ollama_status,
         "virustotal": bool(settings.VIRUSTOTAL_API_KEY),
         "safebrowsing": bool(settings.SAFE_BROWSING_API_KEY),
     }
@@ -138,11 +151,15 @@ async def readiness_check(db: Session = Depends(get_db)):
             "policy": RiskEngine.POLICY_VERSION,
             "static_url_analyzer": "1.0.0",
             "url_normalizer": "1.0.0",
+            "qr_decoder": "1.0.0",
+            "deepfake_detector": "1.0.0-prototype",
         },
         "sandbox_enabled": settings.SAFE_LOCAL_SANDBOX_ENABLED,
         "rate_limiting_enabled": settings.RATE_LIMIT_ENABLED,
         "rate_limit_store": settings.RATE_LIMIT_STORE,
         "ocr_available": ocr_available,
+        "qr_available": True,
+        "deepfake_status": "prototype_weights_unloaded",
         "pilot_mode_enabled": settings.PILOT_MODE_ENABLED,
         "providers_configured": provider_status,
     }

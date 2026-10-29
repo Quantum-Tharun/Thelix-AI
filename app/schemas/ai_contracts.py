@@ -33,3 +33,19 @@ class URLAnalysisRequest(BaseModel):
 class QRAnalysisRequest(BaseModel):
     user_id: str
     image_base64: str
+
+class DeepfakeAnalysisRequest(BaseModel):
+    user_id: str = "dev_default_user"
+    media_base64: str = Field(..., description="Base64 encoded image or frame")
+    media_type: str = Field("image", description="'image' or 'video_frame'")
+    filename: Optional[str] = None
+
+class DeepfakeAnalysisResponse(BaseModel):
+    status: str = Field(..., description="'COMPLETED', 'PROTOTYPE_UNAVAILABLE', or 'FAILED'")
+    is_deepfake: Optional[bool] = None
+    confidence_score: Optional[float] = None
+    probabilistic_notice: str
+    model_version: str
+    indicators_detected: List[str]
+    limitations: List[str]
+    processing_notes: str

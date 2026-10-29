@@ -42,3 +42,11 @@ Thumbs.db
 junit_report.xml
 pytest_*.txt
 pytest_*.log
+
+# Frontend & Node
+node_modules/
+dist/
+dist-ssr/
+.vite/
+frontend/dist/
+frontend/node_modules/

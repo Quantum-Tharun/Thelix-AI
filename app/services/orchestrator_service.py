@@ -51,17 +51,12 @@ class OrchestratorService:
         self.db = db
         self.repo = ScanRepository(db)
 
-        # Initialize LLM provider
+        # Initialize LLM provider with graceful multi-provider fallback (Gemini -> Ollama Gemma -> Mock)
         if llm_provider:
             self.llm_provider = llm_provider
-        elif settings.LLM_PROVIDER == "gemini" and settings.GEMINI_API_KEY:
-            self.llm_provider = GeminiProvider(
-                api_key=settings.GEMINI_API_KEY,
-                model_name=settings.GEMINI_MODEL,
-                max_retries=settings.LLM_MAX_RETRIES,
-            )
         else:
-            self.llm_provider = MockLLMProvider()
+            from llm.fallback_router import FallbackLLMRouter
+            self.llm_provider = FallbackLLMRouter.from_settings()
 
         self.context_interpreter = ContextInterpreter(self.llm_provider)
         self.explanation_generator = ExplanationGenerator(self.llm_provider)
