@@ -1,0 +1,201 @@
+{
+  "phase": "Phase 4: Staging Readiness and Integration Certification",
+  "generated_at": "2026-10-27T18:15:00+05:30",
+  "status_legend": {
+    "PASS": "Verified with the appropriate real integration.",
+    "PARTIAL": "Only some expected paths are verified; core functionality operates under local fallback.",
+    "FAIL": "A reproducible defect exists.",
+    "BLOCKED": "A required environment, credential, or service is unavailable.",
+    "NOT_TESTED": "Verification was not performed."
+  },
+  "workstreams": {
+    "workstream_a_postgresql": [
+      {
+        "id": "INT-PG-01",
+        "name": "SQLAlchemy Driver and Scheme Compatibility",
+        "workstream": "Workstream A",
+        "component": "app/database/session.py, app/config.py",
+        "environment": "Python 3.11.0, SQLAlchemy 2.0.44, psycopg2-binary 2.9.11",
+        "dependency_type": "Database Driver",
+        "status": "PASS",
+        "evidence": "Verified psycopg2-binary driver installed and registered; schema parser validates postgresql:// scheme with pool_pre_ping=True without printing credentials.",
+        "blockers": "None",
+        "limitations": "Direct URL passing requires secure secret management in production."
+      },
+      {
+        "id": "INT-PG-02",
+        "name": "PostgreSQL Staging Harness Execution",
+        "workstream": "Workstream A",
+        "component": "tests/test_postgres_concurrency_and_staging.py::test_postgres_staging_harness_contract",
+        "environment": "PostgreSQL Staging Instance",
+        "dependency_type": "Database Instance",
+        "status": "BLOCKED",
+        "evidence": "TEST_DATABASE_URL is unset; port 5432 is closed on localhost. Test cleanly skipped with explicit infrastructure prerequisite notice. No credentials or fake results fabricated.",
+        "blockers": "Dedicated isolated PostgreSQL database instance not provisioned or configured in TEST_DATABASE_URL.",
+        "limitations": "PostgreSQL dialect specifics (TIMESTAMPTZ formatting, native RLS evaluation) unverified against live server."
+      },
+      {
+        "id": "INT-PG-03",
+        "name": "Migration 002 Contention, Deduplication and Cascade Safety",
+        "workstream": "Workstream A",
+        "component": "docs/migrations/002_quotas_and_refunds.sql, tests/test_postgres_concurrency_and_staging.py::test_postgres_staging_migration_with_contention_and_duplicates",
+        "environment": "PostgreSQL Staging Instance (Destructive Test)",
+        "dependency_type": "Database DDL / Migration",
+        "status": "BLOCKED",
+        "evidence": "Destructive test inspection confirmed DDL drops public.quota_refund_records, public.user_daily_quotas, and public.scans. In accordance with safety rules, test was withheld because TEST_DATABASE_URL is unset and no dedicated disposable database was confirmed.",
+        "blockers": "Requires verified disposable PostgreSQL database with confirmed non-production data isolation.",
+        "limitations": "Idempotent rerun and CTE deduplication verified via local accounting simulation only; live PostgreSQL execution blocked."
+      },
+      {
+        "id": "INT-PG-04",
+        "name": "Multi-Session Atomic Quota & Refund Invariants",
+        "workstream": "Workstream A",
+        "component": "app/repositories/scan_repository.py, tests/test_staging_validation.py",
+        "environment": "SQLite (StaticPool concurrency simulation)",
+        "dependency_type": "Database Transaction Logic",
+        "status": "PASS",
+        "evidence": "test_multi_session_atomic_quota_strict_cap and test_refund_cannot_decrement_below_zero_and_duplicate_refunds_fail passed at 100%. Atomic reservation, single-credit refund caps, and anti-inflation constraints verified.",
+        "blockers": "None for local semantics; PostgreSQL multi-worker row-level locks blocked under INT-PG-02.",
+        "limitations": "SQLite in-memory threading differs from PostgreSQL multi-process MVCC concurrency."
+      }
+    ],
+    "workstream_b_ocr": [
+      {
+        "id": "INT-OCR-01",
+        "name": "Tesseract System Executable Discovery",
+        "workstream": "Workstream B",
+        "component": "ai_engineering/ocr/ocr_pipeline.py, app/ai/ocr/service.py",
+        "environment": "Windows 10 Host OS (PATH inspection)",
+        "dependency_type": "System Binary",
+        "status": "BLOCKED",
+        "evidence": "shutil.which('tesseract') returned None. Program Files paths inspected; binary not found on host. winget search required interactive terms agreement and administrator UAC escalation, preventing automated headless install.",
+        "blockers": "Tesseract OCR binary not installed on host operating system.",
+        "limitations": "Optical character recognition on image attachments cannot extract rendered raster scam text without external binary or cloud OCR."
+      },
+      {
+        "id": "INT-OCR-02",
+        "name": "OpenCV Image Preprocessing and Quality Metrics",
+        "workstream": "Workstream B",
+        "component": "ai_engineering/ocr/ocr_pipeline.py",
+        "environment": "cv2 4.13.0, numpy 2.2.6",
+        "dependency_type": "Image Processing Engine",
+        "status": "PASS",
+        "evidence": "OpenCV successfully loads, resizes, and computes grayscale, Otsu thresholding, Laplacian blur variance, and contrast metrics across test image fixtures.",
+        "blockers": "None",
+        "limitations": "None for image preprocessing."
+      },
+      {
+        "id": "INT-OCR-03",
+        "name": "OCR Fallback Parser and Limitation Provenance",
+        "workstream": "Workstream B",
+        "component": "ai_engineering/ocr/ocr_pipeline.py::_execute_ocr",
+        "environment": "Python 3.11.0",
+        "dependency_type": "Failure Handling & Auditability",
+        "status": "PASS",
+        "evidence": "Verified that when Tesseract binary is absent, _execute_ocr catches TesseractNotFoundError, logs warning, attaches LIMITATION-TESSERACT-BINARY-NOT-CONFIGURED to the report, sets confidence=0.50, and returns engine='fallback_ocr_engine' without crashing or fabricating clean text.",
+        "blockers": "None",
+        "limitations": "Fallback returns empty text payload; scam text inside images cannot be semantically classified without OCR."
+      }
+    ],
+    "workstream_c_providers": [
+      {
+        "id": "INT-PRV-01",
+        "name": "Google Gemini Provider Live Integration",
+        "workstream": "Workstream C",
+        "component": "llm/gemini_provider.py, app/ai/gemini/explanation.py",
+        "environment": "Google GenAI API (v1beta), Python 3.11, GEMINI_API_KEY",
+        "dependency_type": "Cloud LLM Provider",
+        "status": "PASS",
+        "evidence": "Successfully authenticated via GEMINI_API_KEY. Confirmed deprecation of gemini-1.5-flash and gemini-2.5-flash by upstream API; updated configuration default to gemini-3.5-flash-lite. Successfully executed live generateContent test (latency: 9528ms, output verified).",
+        "blockers": "None",
+        "limitations": "Outbound API calls subject to network latency and Google GenAI quota limits."
+      },
+      {
+        "id": "INT-PRV-02",
+        "name": "LLM Explanation Fallback and Non-Override Invariant",
+        "workstream": "Workstream C",
+        "component": "llm/explanation_generator.py",
+        "environment": "Python 3.11.0",
+        "dependency_type": "Security Guardrail",
+        "status": "PASS",
+        "evidence": "Verified that when Gemini API times out after 12.0s, ExplanationGenerator seamlessly falls back to static deterministic templating, producing accurate headline, risk factors, and user guidance without altering the deterministic risk score or recommended action.",
+        "blockers": "None",
+        "limitations": "Static fallback uses predefined templates based on risk score and findings."
+      },
+      {
+        "id": "INT-PRV-03",
+        "name": "Google Safe Browsing Adapter",
+        "workstream": "Workstream C",
+        "component": "risk_engine/reputation_analyzer.py::GoogleSafeBrowsingProvider",
+        "environment": "External Threat Intel API",
+        "dependency_type": "Reputation Intel Provider",
+        "status": "PARTIAL",
+        "evidence": "SAFE_BROWSING_API_KEY is unset in local environment. Provider adapter, bounded timeout (2.0s), exponential backoff, PrivacySanitizer parameter stripping, and mock resilience tests verified in test_provider_resilience.py.",
+        "blockers": "Authorized Google Safe Browsing API key required for live traffic verification.",
+        "limitations": "Unconfigured provider returns UNAVAILABLE; coverage is appropriately decremented to prevent false safe classification."
+      },
+      {
+        "id": "INT-PRV-04",
+        "name": "VirusTotal v3 Adapter",
+        "workstream": "Workstream C",
+        "component": "risk_engine/reputation_analyzer.py::VirusTotalProvider",
+        "environment": "External Threat Intel API",
+        "dependency_type": "Reputation Intel Provider",
+        "status": "PARTIAL",
+        "evidence": "VIRUSTOTAL_API_KEY is unset in local environment. URL base64 identifier encoding, rate limit handling (HTTP 429), bounded retries, and mock resilience tests verified in test_provider_resilience.py.",
+        "blockers": "Authorized VirusTotal API key required for live traffic verification.",
+        "limitations": "Unconfigured provider returns UNAVAILABLE; coverage tracker decrements completed ratio."
+      },
+      {
+        "id": "INT-PRV-05",
+        "name": "Local Gemma Provider via Ollama Daemon",
+        "workstream": "Workstream C",
+        "component": "app/ai/gemma/scam_nlp.py, Ollama HTTP Endpoint",
+        "environment": "Host Localhost port 11434",
+        "dependency_type": "Local LLM Inference Daemon",
+        "status": "BLOCKED",
+        "evidence": "Ollama service detected on port 11434. Query to /api/tags returned installed models: ['llama3.2:latest']. Requested gemma model weights (gemma:2b / gemma-2b-v3) are not pulled on the host.",
+        "blockers": "Ollama model weights for Gemma not downloaded ('ollama pull gemma:2b' required).",
+        "limitations": "Offline local inference pathway cannot be exercised with live weights until model is pulled."
+      }
+    ],
+    "workstream_d_deployment": [
+      {
+        "id": "INT-DEP-01",
+        "name": "Process-Local In-Memory Rate Limiting",
+        "workstream": "Workstream D",
+        "component": "app/middleware/rate_limiter.py",
+        "environment": "FastAPI ASGI Middleware",
+        "dependency_type": "Operational Middleware",
+        "status": "PARTIAL",
+        "evidence": "Sliding window rate limiter verified within single Python process; correctly enforces 120 req/min with burst 30. In multi-worker Uvicorn or multi-container deployments, each worker maintains independent state.",
+        "blockers": "Redis shared key-value store required for multi-worker synchronization.",
+        "limitations": "Multi-worker deployments allow N * configured_limit requests across N worker processes."
+      },
+      {
+        "id": "INT-DEP-02",
+        "name": "In-Process Async Worker Task Durability",
+        "workstream": "Workstream D",
+        "component": "app/api/scans.py, asyncio.create_task",
+        "environment": "Python asyncio Event Loop",
+        "dependency_type": "Background Task Queue",
+        "status": "PARTIAL",
+        "evidence": "Async scan dispatch via asyncio.create_task operates cleanly for normal workflows. Process crash or restart results in loss of in-flight scans. Stuck-scan reconciliation (/v1/scans/reconcile-stuck) successfully recovers stuck records and refunds quotas upon restart.",
+        "blockers": "Durable queue broker (Celery / ARQ / BullMQ with Redis or PostgreSQL) required for zero-loss restarts.",
+        "limitations": "In-flight background tasks do not survive process termination."
+      },
+      {
+        "id": "INT-DEP-03",
+        "name": "Sandbox Execution Disabled Invariant",
+        "workstream": "Workstream D",
+        "component": "app/config.py::SAFE_LOCAL_SANDBOX_ENABLED",
+        "environment": "Runtime Configuration",
+        "dependency_type": "Security Boundary",
+        "status": "PASS",
+        "evidence": "Verified SAFE_LOCAL_SANDBOX_ENABLED remains False. Configuration validation raises ConfigurationError if set to True without isolated containerization.",
+        "blockers": "None",
+        "limitations": "Dynamic headless browser interaction is completely disabled; all evaluations rely on static heuristics and API lookups."
+      }
+    ]
+  }
+}

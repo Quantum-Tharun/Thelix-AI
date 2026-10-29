@@ -1,0 +1,178 @@
+{
+  "audit_version": "1.0.0",
+  "audit_date": "2026-10-27",
+  "audit_type": "Comprehensive Codebase, API, Engineering and Security Baseline Audit",
+  "readiness_verdict": "CONDITIONALLY READY FOR INTEGRATION TESTING",
+  "summary": {
+    "total_findings": 10,
+    "critical": 0,
+    "high": 2,
+    "medium": 4,
+    "low": 2,
+    "informational": 2
+  },
+  "findings": [
+    {
+      "id": "THELIX-AUDIT-001",
+      "category": "Architecture & API Consistency",
+      "severity": "HIGH",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Dual AI Architectural Pathways and Disconnected Subsystem Router",
+      "affected_components": [
+        "app/api/v1/ai.py",
+        "app/ai/orchestrator/orchestrator.py",
+        "app/ai/risk/engine.py",
+        "app/schemas/ai_contracts.py"
+      ],
+      "evidence": "app/api/v1/ai.py exposes /analyze-screenshot, /analyze-url, /analyze-qr routing to AIOrchestrator in app/ai/orchestrator/orchestrator.py. This legacy orchestrator imports app.ai.risk.engine.RiskEngine (a rudimentary 75-line additive mock scoring engine) rather than the authoritative risk_engine package. Furthermore, it completely skips database persistence, does not record audit events, and accepts client-supplied user_id from the JSON payload rather than enforcing identity from verified JWT claims.",
+      "impact": "Clients invoking /v1/ai/* receive assessment verdicts calculated with an obsolete scoring formula that lacks evidence deduplication, coverage tracking, and deterministic policy floors. In addition, no scan history, tasks, or audit records are created in PostgreSQL/SQLite.",
+      "reproduction_steps": "1. Inspect app/api/v1/ai.py line 8 and app/ai/orchestrator/orchestrator.py lines 10, 24-86.\n2. Note that process_screenshot() and process_url() invoke app.ai.risk.engine.RiskEngine.calculate_score() rather than risk_engine.engine.RiskEngine.\n3. Send POST to /v1/ai/analyze-url; observe that no scan record is written to the database.",
+      "recommendation": "Deprecate or re-route /v1/ai/* endpoints to wrap OrchestratorService and MultimodalOrchestrator, enforcing authenticated user_id from JWT and persisting scan records, evidence, and risk assessments into the database.",
+      "verification_limitations": "Existing unit tests in tests/test_api_integration.py and tests/test_auth_matrix.py test both paths separately without reconciling their divergence."
+    },
+    {
+      "id": "THELIX-AUDIT-002",
+      "category": "Reliability & Database Integrity",
+      "severity": "HIGH",
+      "status": "GATE_BLOCKER",
+      "title": "PostgreSQL Staging Gate Blocked Due to Lack of Isolated Database Instance",
+      "affected_components": [
+        "tests/test_postgres_concurrency_and_staging.py",
+        "tests/test_staging_validation.py",
+        "docs/migrations/002_quotas_and_refunds.sql"
+      ],
+      "evidence": "Environment audit confirmed TEST_DATABASE_URL is unset, host port 5432 is closed, and Docker is unavailable. In test execution, 3 mandatory PostgreSQL integration tests (test_postgres_staging_harness_contract, test_postgres_staging_migration_with_contention_and_duplicates, test_postgres_multiprocess_staging_harness) cleanly skipped.",
+      "impact": "Database transaction semantics, multi-process row locking, and migration quota accounting have not been verified under live PostgreSQL concurrent load, preventing certified staging promotion.",
+      "reproduction_steps": "1. Run 'python -m pytest tests/test_postgres_concurrency_and_staging.py -v -k test_postgres'.\n2. Observe 2 tests skipped with 'PostgreSQL staging environment not configured via TEST_DATABASE_URL'.\n3. Run 'python -m pytest tests/test_staging_validation.py -v -k test_postgres'.\n4. Observe 1 test skipped.",
+      "recommendation": "Provision an isolated PostgreSQL staging instance, configure TEST_DATABASE_URL, and execute the 3 skipped gate tests to certify multi-process concurrency and migration invariants.",
+      "verification_limitations": "SQLite in-memory tests verify query logic and locking semantics locally, but cannot substitute for PostgreSQL MVCC and lock isolation verification."
+    },
+    {
+      "id": "THELIX-AUDIT-003",
+      "category": "Code Quality & Dead Code",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Orphaned, Incomplete, and Disconnected AI Subsystems",
+      "affected_components": [
+        "app/ai/gateway/mock_gateway.py",
+        "app/ai/deepfake/vision.py",
+        "app/ai/factcheck/service.py",
+        "app/ai/translation/"
+      ],
+      "evidence": "Static analysis revealed that MockAIGateway is never imported anywhere in the application or test suite. DeepfakeVisionService contains a toy CNN architecture with uninitialized weights and is never registered with any orchestrator or API router. FactCheckService is a standalone HTTP client with no callers. app/ai/translation contains only an empty .gitkeep file.",
+      "impact": "Dead code inflates repository surface area, confuses developers regarding active capabilities, and misleadingly suggests deepfake and fact-checking capabilities are operational.",
+      "reproduction_steps": "1. Execute ripgrep search for 'MockAIGateway', 'DeepfakeVisionService', and 'FactCheckService' across the repository.\n2. Observe zero imports or registrations outside their declaration files.",
+      "recommendation": "Remove MockAIGateway. For DeepfakeVisionService and FactCheckService, either integrate them as pluggable analyzers within MultimodalOrchestrator with trained models, or move them to an experimental research folder.",
+      "verification_limitations": "None. Static code analysis proves lack of runtime references."
+    },
+    {
+      "id": "THELIX-AUDIT-004",
+      "category": "Scalability & Operational Resilience",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED_DEFECT",
+      "title": "In-Memory Rate Limiter Is Process-Bound and Non-Distributed",
+      "affected_components": [
+        "app/middleware/rate_limiter.py"
+      ],
+      "evidence": "RateLimitingMiddleware maintains in-memory dictionaries (self._requests: Dict[str, List[float]]) guarded by an asyncio.Lock. In a production multi-worker deployment (e.g. Uvicorn with 4 workers or multiple Kubernetes pods), each process maintains an independent window.",
+      "impact": "Clients can exceed the intended rate limit proportionally to the number of running worker processes (e.g., 4 workers allow 4x the configured rate limit).",
+      "reproduction_steps": "1. Inspect app/middleware/rate_limiter.py line 33.\n2. Start Uvicorn with '--workers 4'.\n3. Send requests across worker processes; observe separate rate limiting counters per process.",
+      "recommendation": "For multi-worker or clustered deployments, introduce an external shared caching backend (e.g., Redis or Valkey) or PostgreSQL-backed leaky-bucket/sliding-window counter, preserving in-memory fallback for local single-process execution.",
+      "verification_limitations": "Tested and functioning correctly for single-process environments."
+    },
+    {
+      "id": "THELIX-AUDIT-005",
+      "category": "Operational Reliability & Job Durability",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Background Scan Jobs Lack Out-of-Process Durability",
+      "affected_components": [
+        "app/api/v1/scans.py",
+        "app/services/orchestrator_service.py"
+      ],
+      "evidence": "When create_scan is invoked with enable_sandbox=True and sync=False, it queues the execution using FastAPI BackgroundTasks (background_tasks.add_task(OrchestratorService.run_background_scan, ...)). BackgroundTasks execute within the same process memory and threadpool.",
+      "impact": "If the backend process crashes, restarts, or deploys while background scans are executing, in-flight scans are immediately lost and remain in processing state until swept by RetentionService.reconcile_stuck_scans.",
+      "reproduction_steps": "1. Inspect app/api/v1/scans.py lines 116-137.\n2. Submit an asynchronous scan.\n3. Terminate the server process before completion; observe scan remains in QUEUED/PROCESSING until timeout reconciliation.",
+      "recommendation": "For mission-critical production pilots, replace in-process BackgroundTasks with an asynchronous task broker (e.g., Celery, ARQ, or database-backed job queue with transactional leasing).",
+      "verification_limitations": "RetentionService.reconcile_stuck_scans already mitigates permanent hangs by transitioning stuck jobs to FAILED after STUCK_SCAN_TIMEOUT_MINUTES and refunding quota."
+    },
+    {
+      "id": "THELIX-AUDIT-006",
+      "category": "API Contract & Error Hygiene",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Exception Details Leaked in /v1/ai/* Error Responses",
+      "affected_components": [
+        "app/api/v1/ai.py"
+      ],
+      "evidence": "In app/api/v1/ai.py lines 25, 39, and 53, unhandled exceptions are caught with 'except Exception as e: raise HTTPException(status_code=500, detail=str(e))'.",
+      "impact": "Internal exception strings, file paths, or module details can be exposed to API consumers upon upstream failures.",
+      "reproduction_steps": "1. Inspect app/api/v1/ai.py lines 25, 39, 53.\n2. Trigger a simulated runtime failure in an AI service; observe HTTPException detail contains raw exception string.",
+      "recommendation": "Standardize error handling in /v1/ai/* to match /v1/scans, logging the exception internally and returning a generic sanitized error code and user-facing message.",
+      "verification_limitations": "Tested with static code inspection."
+    },
+    {
+      "id": "THELIX-AUDIT-007",
+      "category": "API Design & Schema Rigor",
+      "severity": "LOW",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Missing Response Models on Scan Report, Upload, and Maintenance Endpoints",
+      "affected_components": [
+        "app/api/v1/scans.py",
+        "app/api/v1/maintenance.py"
+      ],
+      "evidence": "Endpoints /v1/scans/{scan_id}/report, /v1/scans/{scan_id}/feedback, /v1/scans/uploads, and all endpoints in /v1/maintenance do not declare a response_model in their route decorator, returning ad-hoc Python dictionaries.",
+      "impact": "OpenAPI documentation (/docs, /openapi.json) lacks complete response schemas for these endpoints, hindering client SDK generation and automated contract testing.",
+      "reproduction_steps": "1. Inspect app/api/v1/scans.py lines 217, 312, 340 and app/api/v1/maintenance.py lines 18, 51, 76, 104.\n2. Access /openapi.json and inspect the response schemas for these endpoints.",
+      "recommendation": "Define explicit Pydantic response models (e.g. ScanReportResponse, ArtifactUploadResponse, MaintenanceTaskResponse) and annotate route decorators.",
+      "verification_limitations": "Endpoints return valid JSON at runtime; defect is limited to documentation and schema validation."
+    },
+    {
+      "id": "THELIX-AUDIT-008",
+      "category": "Code Quality & Upstream Dependencies",
+      "severity": "LOW",
+      "status": "CONFIRMED_DEFECT",
+      "title": "Upstream Google GenAI SDK AiohttpClientSession Deprecation Warnings",
+      "affected_components": [
+        "google.genai._api_client.py"
+      ],
+      "evidence": "Running pytest outputs 17 warnings: 'DeprecationWarning: Inheritance class AiohttpClientSession from ClientSession is discouraged' originating from google.genai._api_client.py:1305.",
+      "impact": "Test runner logs are cluttered by 17 identical deprecation warnings. No runtime functional impact, but future aiohttp releases may deprecate or break class inheritance.",
+      "reproduction_steps": "1. Run 'python -m pytest tests/test_api_integration.py'.\n2. Observe 6 DeprecationWarnings from google/genai/_api_client.py:1305.",
+      "recommendation": "Filter this specific upstream deprecation warning in pytest.ini or pyproject.toml until Google releases an updated google-genai package with aiohttp composition.",
+      "verification_limitations": "Upstream third-party package issue; cannot be fixed within application source code without patching site-packages."
+    },
+    {
+      "id": "THELIX-AUDIT-009",
+      "category": "AI Evaluation & Calibration",
+      "severity": "INFORMATIONAL",
+      "status": "VERIFIED_LIMITATION",
+      "title": "Holdout Evaluation Dataset Sample Size Limitations",
+      "affected_components": [
+        "ai_engineering/evaluation/release_gate.py",
+        "ai_engineering/datasets/"
+      ],
+      "evidence": "The release gate evaluation suite operates on 18 holdout URL samples and 6 holdout multimodal samples, reporting 100% precision and recall.",
+      "impact": "While metric assertions pass with zero data leakage, small sample sizes can lead to overconfidence regarding generalized real-world zero-day threat detection.",
+      "reproduction_steps": "1. Run 'python -m ai_engineering.evaluation.release_gate'.\n2. Review denominator counts: URL Holdout Denom=18, Multimodal Holdout Denom=6.",
+      "recommendation": "Expand holdout validation datasets to at least 500+ diverse real-world threat feeds and benign corpuses prior to broad commercial release.",
+      "verification_limitations": "Holdout split isolation and schema validation verified; sample size is an inherent design constraint of the current baseline."
+    },
+    {
+      "id": "THELIX-AUDIT-010",
+      "category": "Security Architecture & Sandbox Isolation",
+      "severity": "INFORMATIONAL",
+      "status": "VERIFIED_BEHAVIOR",
+      "title": "Browser Sandbox Safely Fails Closed as Required",
+      "affected_components": [
+        "sandbox/controller.py",
+        "app/config.py"
+      ],
+      "evidence": "SAFE_LOCAL_SANDBOX_ENABLED is False by default. SandboxController explicitly checks this setting and returns a safe fail-closed result ('disabled_by_policy: True') with static analysis performed, preventing uncontained network access.",
+      "impact": "System functions securely by design without exposing the host system to live malicious payload execution.",
+      "reproduction_steps": "1. Submit a scan with enable_sandbox=True when SAFE_LOCAL_SANDBOX_ENABLED=False.\n2. Observe scan succeeds with static analysis and sandbox inspection recorded as disabled by policy.",
+      "recommendation": "Maintain SAFE_LOCAL_SANDBOX_ENABLED=False until dedicated containerized isolation (e.g. gVisor or microVM) with strict egress proxies is deployed.",
+      "verification_limitations": "Verified across test_sandbox.py and test_sandbox_hardening.py."
+    }
+  ]
+}

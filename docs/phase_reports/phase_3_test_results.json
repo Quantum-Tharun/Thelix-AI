@@ -1,0 +1,217 @@
+{
+  "phase": "Phase 3: End-to-End Feature Validation and Risk-Analysis Verification",
+  "generated_at": "2026-10-27T17:55:00+05:30",
+  "test_execution_summary": {
+    "command": "python -m pytest",
+    "total_tests": 342,
+    "passed": 339,
+    "failed": 0,
+    "skipped": 3,
+    "warnings": 27,
+    "execution_time_seconds": 56.27,
+    "test_categories": {
+      "unit_tests": 184,
+      "mocked_integration_tests": 117,
+      "local_database_integration_tests": 38,
+      "real_cloud_provider_tests": 0,
+      "postgres_staging_tests": 0
+    },
+    "skipped_details": [
+      {
+        "test": "tests/test_staging_validation.py::TestStagingValidation::test_staging_postgresql_connection",
+        "reason": "TEST_DATABASE_URL not set; PostgreSQL staging environment unavailable."
+      },
+      {
+        "test": "tests/test_staging_validation.py::TestStagingValidation::test_staging_migration_and_schema_parity",
+        "reason": "TEST_DATABASE_URL not set; PostgreSQL staging environment unavailable."
+      },
+      {
+        "test": "tests/test_staging_validation.py::TestStagingValidation::test_staging_quota_transaction_atomicity",
+        "reason": "TEST_DATABASE_URL not set; PostgreSQL staging environment unavailable."
+      }
+    ]
+  },
+  "phase3_suite_breakdown": {
+    "test_file": "tests/test_phase3_validation.py",
+    "total_phase3_tests": 38,
+    "passed": 38,
+    "failed": 0,
+    "classes": [
+      {
+        "class_name": "TestApiContracts",
+        "test_count": 8,
+        "passed": 8,
+        "failed": 0,
+        "tests": [
+          "test_health_and_readiness_contracts",
+          "test_missing_required_fields_contract",
+          "test_incorrect_data_types_contract",
+          "test_malformed_inputs_contract",
+          "test_unsupported_multimodal_formats_contract",
+          "test_oversized_upload_and_text_rejection_contract",
+          "test_sanitized_error_responses_contract",
+          "test_daily_quota_exhaustion_contract"
+        ]
+      },
+      {
+        "class_name": "TestUrlRiskAnalysisMatrix",
+        "test_count": 6,
+        "passed": 6,
+        "failed": 0,
+        "tests": [
+          "test_url_benign_clean_matrix",
+          "test_url_suspicious_patterns_matrix",
+          "test_url_malformed_and_dangerous_schemes_matrix",
+          "test_url_encoding_anomalies_and_open_redirects_matrix",
+          "test_url_reputation_provider_failure_safe_degradation",
+          "test_url_conflicting_evidence_resolution"
+        ]
+      },
+      {
+        "class_name": "TestMultimodalValidation",
+        "test_count": 6,
+        "passed": 6,
+        "failed": 0,
+        "tests": [
+          "test_screenshot_valid_and_empty_inputs",
+          "test_screenshot_corrupt_and_decompression_bomb",
+          "test_qr_valid_url_and_dangerous_schemes",
+          "test_pdf_valid_text_and_link_extraction",
+          "test_suspicious_message_scam_categories",
+          "test_adversarial_prompt_injection_defense"
+        ]
+      },
+      {
+        "class_name": "TestRiskEngineInvariants",
+        "test_count": 4,
+        "passed": 4,
+        "failed": 0,
+        "tests": [
+          "test_invariant_score_range_and_complementarity",
+          "test_invariant_severity_floors_enforcement",
+          "test_invariant_llm_non_override_guardrail",
+          "test_invariant_idempotency_and_repeatability"
+        ]
+      },
+      {
+        "class_name": "TestPersistenceAndLifecycle",
+        "test_count": 6,
+        "passed": 6,
+        "failed": 0,
+        "tests": [
+          "test_sync_scan_relational_persistence_lifecycle",
+          "test_async_scan_queued_lifecycle",
+          "test_scan_feedback_and_audit_events_persistence",
+          "test_scan_deletion_and_artifact_cascade",
+          "test_stuck_scan_reconciliation_and_quota_refund",
+          "test_retention_pruning_and_gdpr_purge"
+        ]
+      },
+      {
+        "class_name": "TestProviderResilience",
+        "test_count": 2,
+        "passed": 2,
+        "failed": 0,
+        "tests": [
+          "test_safebrowsing_timeout_and_error_handling",
+          "test_virustotal_rate_limit_and_error_handling"
+        ]
+      },
+      {
+        "class_name": "TestSecurityRegressions",
+        "test_count": 6,
+        "passed": 6,
+        "failed": 0,
+        "tests": [
+          "test_auth_jwt_validation_matrix",
+          "test_user_impersonation_prevention_matrix",
+          "test_cross_user_isolation_anti_enumeration_matrix",
+          "test_service_role_restrictions_matrix",
+          "test_ssrf_prohibited_targets_matrix",
+          "test_safe_sandbox_disabled_invariant"
+        ]
+      }
+    ]
+  },
+  "metrics_and_evaluation": {
+    "caveat_notice": "Small holdout fixture datasets. High precision/recall demonstrates deterministic implementation consistency against targeted fixtures, not calibrated statistical performance across open-web distributions. Do not interpret raw risk scores as probabilities.",
+    "url_holdout_evaluation": {
+      "dataset_provenance": "eval/data/url_holdout.json (Synthetic curated benchmark fixtures)",
+      "sample_count": 35,
+      "class_distribution": {
+        "benign": 17,
+        "malicious": 18
+      },
+      "confusion_matrix": {
+        "true_positives": 18,
+        "true_negatives": 17,
+        "false_positives": 0,
+        "false_negatives": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "f1_score": 1.0,
+        "coverage_ratio": 1.0,
+        "inconclusive_rate": 0.0
+      },
+      "confidence_intervals_95_percent_wilson": {
+        "recall_ci": [0.8241, 1.0],
+        "precision_ci": [0.8241, 1.0],
+        "fpr_ci": [0.0, 0.1873]
+      }
+    },
+    "multimodal_holdout_evaluation": {
+      "dataset_provenance": "eval/data/multimodal_holdout.json (Synthetic curated image/QR/PDF/text fixtures)",
+      "sample_count": 12,
+      "class_distribution": {
+        "benign": 4,
+        "malicious": 6,
+        "inconclusive": 2
+      },
+      "confusion_matrix_decisive_samples": {
+        "true_positives": 6,
+        "true_negatives": 4,
+        "false_positives": 0,
+        "false_negatives": 0
+      },
+      "metrics_decisive": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "f1_score": 1.0,
+        "inconclusive_rate": 0.1667
+      },
+      "confidence_intervals_95_percent_wilson": {
+        "recall_ci": [0.6096, 1.0],
+        "precision_ci": [0.6096, 1.0],
+        "fpr_ci": [0.0, 0.4899]
+      }
+    },
+    "throughput_benchmark": {
+      "harness": "eval/benchmark_harness.py",
+      "target_scenario": "Synchronous URL Evaluation (Static Heuristics + Scoring)",
+      "concurrency_level": 10,
+      "measured_throughput_rps": 217.81,
+      "mean_latency_ms": 4.59,
+      "p95_latency_ms": 7.82,
+      "p99_latency_ms": 11.45
+    }
+  },
+  "dependency_status": {
+    "python_runtime": "Python 3.11.0 (win32)",
+    "fastapi": "0.135.1 (Available)",
+    "pydantic": "2.12.5 (Available)",
+    "sqlalchemy": "2.0.44 (Available)",
+    "pypdf": "6.21.2 (Available)",
+    "opencv_python": "cv2 4.13.0 (Available)",
+    "torch": "2.10.0 (Available)",
+    "pyzbar": "Unavailable (Bypassed natively via cv2.QRCodeDetector)",
+    "tesseract_binary": "Not found on host PATH (Handled gracefully via fallback OCR with documented limitation)",
+    "ollama_local_daemon": "Not running / host unreachable (Local Gemma provider BLOCKED)",
+    "postgresql_staging_instance": "TEST_DATABASE_URL not set (PostgreSQL staging gate BLOCKED)"
+  }
+}

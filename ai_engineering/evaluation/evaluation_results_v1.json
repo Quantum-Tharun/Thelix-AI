@@ -1,0 +1,1539 @@
+{
+  "evaluation_metadata": {
+    "dataset_version": "1.0.0",
+    "dataset_split": "all",
+    "total_samples": 100,
+    "benign_samples": 50,
+    "malicious_samples": 50
+  },
+  "confusion_matrix": {
+    "true_positives": 50,
+    "false_positives": 0,
+    "true_negatives": 50,
+    "false_negatives": 0,
+    "inconclusive_benign": 0,
+    "inconclusive_malicious": 0,
+    "total_inconclusive": 0
+  },
+  "metrics_decisive": {
+    "precision": 1.0,
+    "precision_ci_95": [
+      0.9286,
+      1.0
+    ],
+    "recall": 1.0,
+    "recall_ci_95": [
+      0.9286,
+      1.0
+    ],
+    "false_positive_rate": 0.0,
+    "false_positive_rate_ci_95": [
+      0.0,
+      0.0714
+    ],
+    "false_negative_rate": 0.0,
+    "false_negative_rate_ci_95": [
+      0.0,
+      0.0714
+    ],
+    "accuracy": 1.0,
+    "f1_score": 1.0
+  },
+  "abstention_and_coverage": {
+    "total_inconclusive": 0,
+    "abstention_rate": 0.0,
+    "inconclusive_rate_benign": 0.0,
+    "inconclusive_rate_malicious": 0.0,
+    "mean_engine_coverage": 1.0
+  },
+  "score_distributions": {
+    "benign_risk_scores": {
+      "count": 50,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "p25": 0.0,
+      "p50": 0.0,
+      "p75": 0.0,
+      "p95": 0.0
+    },
+    "malicious_risk_scores": {
+      "count": 50,
+      "mean": 90.54,
+      "median": 100.0,
+      "std": 21.3,
+      "min": 40.0,
+      "max": 100.0,
+      "p25": 99.0,
+      "p50": 100.0,
+      "p75": 100.0,
+      "p95": 100.0
+    },
+    "benign_confidence": {
+      "count": 50,
+      "mean": 0.81,
+      "median": 0.81,
+      "std": 0.0,
+      "min": 0.81,
+      "max": 0.81,
+      "p25": 0.81,
+      "p50": 0.81,
+      "p75": 0.81,
+      "p95": 0.81
+    },
+    "malicious_confidence": {
+      "count": 50,
+      "mean": 0.9,
+      "median": 0.89,
+      "std": 0.02,
+      "min": 0.87,
+      "max": 0.95,
+      "p25": 0.89,
+      "p50": 0.89,
+      "p75": 0.9,
+      "p95": 0.94
+    }
+  },
+  "performance_by_category": {
+    "legit_top_tech": {
+      "total": 14,
+      "tp": 0,
+      "fp": 0,
+      "tn": 14,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_ecommerce": {
+      "total": 4,
+      "tp": 0,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_finance_portal": {
+      "total": 4,
+      "tp": 0,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_educational": {
+      "total": 9,
+      "tp": 0,
+      "fp": 0,
+      "tn": 9,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_gov_edu": {
+      "total": 9,
+      "tp": 0,
+      "fp": 0,
+      "tn": 9,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_community": {
+      "total": 4,
+      "tp": 0,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_streaming": {
+      "total": 3,
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "legit_media": {
+      "total": 3,
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 0.0
+    },
+    "brand_impersonation": {
+      "total": 27,
+      "tp": 27,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 99.96
+    },
+    "ip_literal_phish": {
+      "total": 5,
+      "tp": 5,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 98.8
+    },
+    "userinfo_deception": {
+      "total": 3,
+      "tp": 3,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 99.0
+    },
+    "idn_homoglyph": {
+      "total": 3,
+      "tp": 3,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 43.0
+    },
+    "suspicious_tld_credential_harvest": {
+      "total": 3,
+      "tp": 3,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 99.67
+    },
+    "malware_delivery": {
+      "total": 4,
+      "tp": 4,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 100.0
+    },
+    "double_encoding_anomaly": {
+      "total": 3,
+      "tp": 3,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 43.0
+    },
+    "open_redirect_abuse": {
+      "total": 2,
+      "tp": 2,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "inconclusive": 0,
+      "mean_risk_score": 40.0
+    }
+  },
+  "detailed_results": [
+    {
+      "sample_id": "TUNE-BEN-001",
+      "url": "https://www.google.com/search?q=cybersecurity+best+practices",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-002",
+      "url": "https://github.com/torvalds/linux/releases",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-003",
+      "url": "https://www.microsoft.com/en-us/windows/get-windows-11",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-004",
+      "url": "https://www.amazon.com/dp/B08N5WRWNW",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-005",
+      "url": "https://www.paypal.com/signin",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-006",
+      "url": "https://en.wikipedia.org/wiki/Computer_security",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-007",
+      "url": "https://www.irs.gov/payments/pay-taxes-by-credit-or-debit-card",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-008",
+      "url": "https://www.chase.com/personal/banking",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-009",
+      "url": "https://news.ycombinator.com/item?id=12345678",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-010",
+      "url": "https://www.netflix.com/browse",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-011",
+      "url": "https://apple.com/iphone-15-pro/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-012",
+      "url": "https://www.bankofamerica.com/credit-cards/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-013",
+      "url": "https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-014",
+      "url": "https://www.usps.com/manage/package-intercept.htm",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-BEN-015",
+      "url": "https://www.nytimes.com/section/technology",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "TUNE-MAL-001",
+      "url": "http://paypal-verification-center-update.xyz/login.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-002",
+      "url": "http://198.51.100.84/secure/bankofamerica-login/",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 98,
+      "trust_score": 2,
+      "confidence": 0.9111,
+      "findings": [
+        "FIND-REP-VIRUSTOTAL",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-003",
+      "url": "https://accounts.google.com@evil-destination-phish.com/verify-account",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 99,
+      "trust_score": 1,
+      "confidence": 0.9502,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-USERINFO"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-004",
+      "url": "http://xn--pple-43d.com/support-id-recovery",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8838,
+      "findings": [
+        "FIND-URL-HOMOGRAPH"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-005",
+      "url": "http://microsoft-online-security-auth.top/recovery.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-006",
+      "url": "http://amazon-account-billing-alert.club/signin?session=reset",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-007",
+      "url": "http://203.0.113.15:8080/c2/payload.exe",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-008",
+      "url": "http://chase-bank-security-verification.buzz/index.html",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 99,
+      "trust_score": 1,
+      "confidence": 0.8757,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-009",
+      "url": "https://secure-login-gateway.com/auth%252e%252e%252fadmin",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8867,
+      "findings": [
+        "FIND-URL-DOUBLE-ENCODING"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-010",
+      "url": "http://usps-tracking-package-redelivery.work/tracking.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-011",
+      "url": "http://irs-tax-refund-claim-portal.click/refund.htm",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-012",
+      "url": "http://netflix-billing-update-subscription.cam/login",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-013",
+      "url": "http://198.51.100.99/dhl/express-shipment-confirm.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 98,
+      "trust_score": 2,
+      "confidence": 0.9111,
+      "findings": [
+        "FIND-REP-VIRUSTOTAL",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-014",
+      "url": "http://wellsfargo-online-account-recovery.top/verify.htm",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "TUNE-MAL-015",
+      "url": "http://coinbase-wallet-security-auth.icu/restore",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-BEN-001",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-002",
+      "url": "https://stackoverflow.com/questions/509211/understanding-slice-notation",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-003",
+      "url": "https://www.linkedin.com/feed/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-004",
+      "url": "https://www.cdc.gov/flu/about/index.html",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-005",
+      "url": "https://www.adobe.com/creativecloud.html",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-006",
+      "url": "https://www.spotify.com/us/premium/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-007",
+      "url": "https://pypi.org/project/fastapi/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-008",
+      "url": "https://www.bbc.com/news/world",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-009",
+      "url": "https://www.oracle.com/cloud/free/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-010",
+      "url": "https://www.reddit.com/r/Python/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-011",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-012",
+      "url": "https://www.salesforce.com/products/crm/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-013",
+      "url": "https://www.harvard.edu/programs/computer-science/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-014",
+      "url": "https://www.stripe.com/docs/api",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-015",
+      "url": "https://www.cisco.com/c/en/us/products/security/index.html",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-016",
+      "url": "https://zoom.us/join",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-017",
+      "url": "https://www.docker.com/products/docker-desktop/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-018",
+      "url": "https://www.nature.com/articles/d41586-024-00001-x",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-019",
+      "url": "https://www.fedex.com/en-us/tracking.html",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-BEN-020",
+      "url": "https://duckduckgo.com/?q=privacy+tools&t=h_&ia=web",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "EVAL-MAL-001",
+      "url": "http://paypal-security-alert-resolution.xyz/login",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-002",
+      "url": "http://198.51.100.112/apple-id-suspended/verify.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-003",
+      "url": "https://signin.chase.com@phishing-target-redirect.work/auth",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 99,
+      "trust_score": 1,
+      "confidence": 0.9083,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-USERINFO",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-004",
+      "url": "http://xn--gogle-qqa.com/webhp?auth=account_recovery",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8838,
+      "findings": [
+        "FIND-URL-HOMOGRAPH"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-005",
+      "url": "http://microsoft-365-password-reset.click/owa/",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-006",
+      "url": "http://amazon-prime-delivery-status.top/confirm.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-007",
+      "url": "http://netflix-user-profile-locked.loan/renew",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 99,
+      "trust_score": 1,
+      "confidence": 0.8757,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-008",
+      "url": "http://203.0.113.44:8443/trojan/dropper.bin",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-009",
+      "url": "http://citibank-card-fraud-alert.work/unlock.htm",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-010",
+      "url": "https://secure-portal.com/redirect?url=http://malicious-cred-stealer.xyz/login",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 40,
+      "trust_score": 60,
+      "confidence": 0.8683,
+      "findings": [
+        "FIND-URL-REDIRECT-PARAM"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-011",
+      "url": "http://usps-redelivery-postal-code.buzz/index.html",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-012",
+      "url": "http://fedex-express-delivery-hold.club/invoice.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-013",
+      "url": "http://198.51.100.221/whatsapp-chat-backup-sync/auth",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 98,
+      "trust_score": 2,
+      "confidence": 0.9164,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-014",
+      "url": "http://facebook-security-checkpoint-appeal.top/appeal.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-015",
+      "url": "http://instagram-verified-badge-apply.xyz/submit",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-016",
+      "url": "http://dhl-parcel-notification-status.work/check.htm",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-017",
+      "url": "http://binance-kyc-verification-center.buzz/login",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-018",
+      "url": "http://metamask-seed-phrase-restore.club/wallet.html",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-019",
+      "url": "https://identity-verify-center.com/session%252e%252e%252fauth",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8867,
+      "findings": [
+        "FIND-URL-DOUBLE-ENCODING"
+      ]
+    },
+    {
+      "sample_id": "EVAL-MAL-020",
+      "url": "http://203.0.113.177/stealer/gate.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "HOLD-BEN-001",
+      "url": "https://www.nature.com/nature/current-issue",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-002",
+      "url": "https://www.reuters.com/markets/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-003",
+      "url": "https://www.githubstatus.com/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-004",
+      "url": "https://www.nih.gov/health-information",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-005",
+      "url": "https://www.dropbox.com/features/cloud-storage",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-006",
+      "url": "https://www.mit.edu/research/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-007",
+      "url": "https://www.stanford.edu/academics/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-008",
+      "url": "https://www.target.com/c/grocery/-/N-5xt1a",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-009",
+      "url": "https://www.costco.com/warehouse-locations",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-010",
+      "url": "https://aws.amazon.com/s3/pricing/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-011",
+      "url": "https://docs.python.org/3/library/json.html",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-012",
+      "url": "https://www.uspto.gov/trademarks",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-013",
+      "url": "https://www.weather.gov/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-014",
+      "url": "https://www.wikipedia.org/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-BEN-015",
+      "url": "https://archive.org/web/",
+      "ground_truth": "BENIGN",
+      "verdict": "allow",
+      "outcome": "TRUE_NEGATIVE",
+      "risk_score": 0,
+      "trust_score": 100,
+      "confidence": 0.8075,
+      "findings": []
+    },
+    {
+      "sample_id": "HOLD-MAL-001",
+      "url": "http://apple-support-recovery-center.xyz/unlock",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-002",
+      "url": "http://198.51.100.155/paypal-auth/confirm-identity.htm",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-003",
+      "url": "https://login.microsoftonline.com@account-security-alert.click/portal",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 99,
+      "trust_score": 1,
+      "confidence": 0.9083,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-USERINFO",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-004",
+      "url": "http://xn--microsft-07a.com/security/login.srf",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8838,
+      "findings": [
+        "FIND-URL-HOMOGRAPH"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-005",
+      "url": "http://chase-security-card-verify.top/auth.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-006",
+      "url": "http://amazon-account-suspended-action.buzz/signin",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-007",
+      "url": "http://203.0.113.89:8080/ransomware/encryptor.exe",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9372,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-IP-HOST"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-008",
+      "url": "http://bankofamerica-online-id-verify.work/login.html",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-009",
+      "url": "https://auth-server.org/forward?dest=http://phish-credential-catcher.icu/login",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 40,
+      "trust_score": 60,
+      "confidence": 0.8683,
+      "findings": [
+        "FIND-URL-REDIRECT-PARAM"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-010",
+      "url": "http://usps-package-address-verification.club/track",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-011",
+      "url": "http://fedex-express-delivery-hold.cam/tracking",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-012",
+      "url": "http://wellsfargo-security-upgrade.loan/signin",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8938,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-013",
+      "url": "http://coinbase-account-restricted-help.xyz/unlock.php",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.8886,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD",
+        "FIND-URL-HIGH-ENTROPY"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-014",
+      "url": "https://verification-node.net/portal%252e%252e%252fsignin",
+      "ground_truth": "MALICIOUS",
+      "verdict": "warn",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 43,
+      "trust_score": 57,
+      "confidence": 0.8867,
+      "findings": [
+        "FIND-URL-DOUBLE-ENCODING"
+      ]
+    },
+    {
+      "sample_id": "HOLD-MAL-015",
+      "url": "http://dhl-express-customs-duty.top/payment.html",
+      "ground_truth": "MALICIOUS",
+      "verdict": "block",
+      "outcome": "TRUE_POSITIVE",
+      "risk_score": 100,
+      "trust_score": 0,
+      "confidence": 0.9021,
+      "findings": [
+        "FIND-REP-GOOGLE_SAFE_BROWSING",
+        "FIND-URL-BRAND-IMPERSONATION",
+        "FIND-URL-SUSPICIOUS-TLD"
+      ]
+    }
+  ]
+}

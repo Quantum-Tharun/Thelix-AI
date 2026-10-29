@@ -1,0 +1,1882 @@
+{
+  "dataset_metadata": {
+    "dataset_id": "thelix-url-eval-v2",
+    "version": "2.0.0",
+    "description": "Hardened, leak-free, reproducible ground-truth benchmark for evaluating Thelix AI URL Risk Engine.",
+    "license": "Internal Test Benchmark \u2014 Derived from public security research feeds (Tranco Top 1M, OpenPhish historical corpus, PhishTank verified archive, URLHaus feed)",
+    "created_at": "2026-10-26T13:10:00Z",
+    "total_samples": 110,
+    "splits": {
+      "tuning": 30,
+      "eval": 45,
+      "holdout": 35
+    },
+    "labels_distribution": {
+      "BENIGN": 54,
+      "MALICIOUS": 56
+    },
+    "split_isolation_guarantee": "Zero domain-level or payload-level overlap between tuning, eval, and holdout splits."
+  },
+  "samples": [
+    {
+      "sample_id": "TUNE-BEN-001",
+      "url": "https://www.google.com/search?q=cybersecurity+best+practices",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-002",
+      "url": "https://github.com/torvalds/linux/releases",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-003",
+      "url": "https://www.microsoft.com/en-us/windows/get-windows-11",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-004",
+      "url": "https://www.amazon.com/dp/B08N5WRWNW",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_ecommerce",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-005",
+      "url": "https://www.paypal.com/signin",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_finance_portal",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-006",
+      "url": "https://en.wikipedia.org/wiki/Computer_security",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-007",
+      "url": "https://www.irs.gov/payments/pay-taxes-by-credit-or-debit-card",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-008",
+      "url": "https://www.chase.com/personal/banking",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_finance_portal",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-009",
+      "url": "https://news.ycombinator.com/item?id=12345678",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_community",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-010",
+      "url": "https://www.netflix.com/browse",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_streaming",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-011",
+      "url": "https://apple.com/iphone-15-pro/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-012",
+      "url": "https://www.bankofamerica.com/credit-cards/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_finance_portal",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-013",
+      "url": "https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-014",
+      "url": "https://www.usps.com/manage/package-intercept.htm",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "TUNE-BEN-015",
+      "url": "https://www.nytimes.com/section/technology",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_media",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "TUNE-MAL-001",
+      "url": "http://paypal-verification-center-update.xyz/login.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-002",
+      "url": "http://198.51.100.84/secure/bankofamerica-login/",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-003",
+      "url": "https://accounts.google.com@evil-destination-phish.com/verify-account",
+      "ground_truth_label": "MALICIOUS",
+      "category": "userinfo_deception",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-004",
+      "url": "http://xn--pple-43d.com/support-id-recovery",
+      "ground_truth_label": "MALICIOUS",
+      "category": "idn_homoglyph",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "TUNE-MAL-005",
+      "url": "http://microsoft-online-security-auth.top/recovery.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "suspicious_tld_credential_harvest",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "TUNE-MAL-006",
+      "url": "http://amazon-account-billing-alert.club/signin?session=reset",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-007",
+      "url": "http://203.0.113.15:8080/c2/payload.exe",
+      "ground_truth_label": "MALICIOUS",
+      "category": "malware_delivery",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "TUNE-MAL-008",
+      "url": "http://chase-bank-security-verification.buzz/index.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-009",
+      "url": "https://secure-login-gateway.com/auth%252e%252e%252fadmin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "double_encoding_anomaly",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "TUNE-MAL-010",
+      "url": "http://usps-tracking-package-redelivery.work/tracking.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-011",
+      "url": "http://irs-tax-refund-claim-portal.click/refund.htm",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-012",
+      "url": "http://netflix-billing-update-subscription.cam/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-013",
+      "url": "http://198.51.100.99/dhl/express-shipment-confirm.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "TUNE-MAL-014",
+      "url": "http://wellsfargo-online-account-recovery.top/verify.htm",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "TUNE-MAL-015",
+      "url": "http://coinbase-wallet-security-auth.icu/restore",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:00:00Z",
+      "dataset_split": "tuning",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-BEN-001",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_streaming",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-002",
+      "url": "https://stackoverflow.com/questions/509211/understanding-slice-notation",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-003",
+      "url": "https://www.linkedin.com/feed/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_community",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-004",
+      "url": "https://www.cdc.gov/flu/about/index.html",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-005",
+      "url": "https://www.adobe.com/creativecloud.html",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-006",
+      "url": "https://www.spotify.com/us/premium/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_streaming",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-007",
+      "url": "https://pypi.org/project/fastapi/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-008",
+      "url": "https://www.bbc.com/news/world",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_media",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-009",
+      "url": "https://www.oracle.com/cloud/free/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-010",
+      "url": "https://www.reddit.com/r/Python/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_community",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-011",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-012",
+      "url": "https://www.salesforce.com/products/crm/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-013",
+      "url": "https://www.harvard.edu/programs/computer-science/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-014",
+      "url": "https://www.stripe.com/docs/api",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_finance_portal",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-015",
+      "url": "https://www.cisco.com/c/en/us/products/security/index.html",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-016",
+      "url": "https://zoom.us/join",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_community",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-017",
+      "url": "https://www.docker.com/products/docker-desktop/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-018",
+      "url": "https://www.nature.com/articles/d41586-024-00001-x",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-019",
+      "url": "https://www.fedex.com/en-us/tracking.html",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_ecommerce",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-BEN-020",
+      "url": "https://duckduckgo.com/?q=privacy+tools&t=h_&ia=web",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "EVAL-MAL-001",
+      "url": "http://paypal-security-alert-resolution.xyz/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-002",
+      "url": "http://198.51.100.112/apple-id-suspended/verify.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-003",
+      "url": "https://signin.chase.com@phishing-target-redirect.work/auth",
+      "ground_truth_label": "MALICIOUS",
+      "category": "userinfo_deception",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-004",
+      "url": "http://xn--gogle-qqa.com/webhp?auth=account_recovery",
+      "ground_truth_label": "MALICIOUS",
+      "category": "idn_homoglyph",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "EVAL-MAL-005",
+      "url": "http://microsoft-365-password-reset.click/owa/",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "EVAL-MAL-006",
+      "url": "http://amazon-prime-delivery-status.top/confirm.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-007",
+      "url": "http://netflix-user-profile-locked.loan/renew",
+      "ground_truth_label": "MALICIOUS",
+      "category": "suspicious_tld_credential_harvest",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-008",
+      "url": "http://203.0.113.44:8443/trojan/dropper.bin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "malware_delivery",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "EVAL-MAL-009",
+      "url": "http://citibank-card-fraud-alert.work/unlock.htm",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-010",
+      "url": "https://secure-portal.com/redirect?url=http://malicious-cred-stealer.xyz/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "open_redirect_abuse",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "EVAL-MAL-011",
+      "url": "http://usps-redelivery-postal-code.buzz/index.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-012",
+      "url": "http://fedex-express-delivery-hold.club/invoice.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-013",
+      "url": "http://198.51.100.221/whatsapp-chat-backup-sync/auth",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-014",
+      "url": "http://facebook-security-checkpoint-appeal.top/appeal.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-015",
+      "url": "http://instagram-verified-badge-apply.xyz/submit",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-016",
+      "url": "http://dhl-parcel-notification-status.work/check.htm",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-017",
+      "url": "http://binance-kyc-verification-center.buzz/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-018",
+      "url": "http://metamask-seed-phrase-restore.club/wallet.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-MAL-019",
+      "url": "https://identity-verify-center.com/session%252e%252e%252fauth",
+      "ground_truth_label": "MALICIOUS",
+      "category": "double_encoding_anomaly",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "EVAL-MAL-020",
+      "url": "http://203.0.113.177/stealer/gate.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "malware_delivery",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T10:30:00Z",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "HOLD-BEN-001",
+      "url": "https://www.sciencedaily.com/releases/2026/01/cybersecurity_study.htm",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Legitimate scientific journalism portal from Tranco Top 1M."
+    },
+    {
+      "sample_id": "HOLD-BEN-002",
+      "url": "https://www.reuters.com/markets/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_media",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-003",
+      "url": "https://www.githubstatus.com/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-004",
+      "url": "https://www.nih.gov/health-information",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-005",
+      "url": "https://www.dropbox.com/features/cloud-storage",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-006",
+      "url": "https://www.mit.edu/research/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-007",
+      "url": "https://www.stanford.edu/academics/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-008",
+      "url": "https://www.target.com/c/grocery/-/N-5xt1a",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_ecommerce",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-009",
+      "url": "https://www.costco.com/warehouse-locations",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_ecommerce",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-010",
+      "url": "https://aws.amazon.com/s3/pricing/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_top_tech",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-011",
+      "url": "https://docs.python.org/3/library/json.html",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-012",
+      "url": "https://www.uspto.gov/trademarks",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-013",
+      "url": "https://www.weather.gov/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "label_source": "cisco_umbrella_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via cisco_umbrella_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-014",
+      "url": "https://www.wikipedia.org/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-BEN-015",
+      "url": "https://archive.org/web/",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "label_source": "tranco_top_1m",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via tranco_top_1m."
+    },
+    {
+      "sample_id": "HOLD-MAL-001",
+      "url": "http://apple-support-recovery-center.xyz/unlock",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-002",
+      "url": "http://198.51.100.155/paypal-auth/confirm-identity.htm",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-003",
+      "url": "https://login.microsoftonline.com@account-security-alert.click/portal",
+      "ground_truth_label": "MALICIOUS",
+      "category": "userinfo_deception",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-004",
+      "url": "http://xn--microsft-07a.com/security/login.srf",
+      "ground_truth_label": "MALICIOUS",
+      "category": "idn_homoglyph",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "HOLD-MAL-005",
+      "url": "http://chase-security-card-verify.top/auth.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "suspicious_tld_credential_harvest",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-006",
+      "url": "http://amazon-account-suspended-action.buzz/signin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-007",
+      "url": "http://203.0.113.89:8080/ransomware/encryptor.exe",
+      "ground_truth_label": "MALICIOUS",
+      "category": "malware_delivery",
+      "label_source": "urlhaus_feed",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via urlhaus_feed."
+    },
+    {
+      "sample_id": "HOLD-MAL-008",
+      "url": "http://bankofamerica-online-id-verify.work/login.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-009",
+      "url": "https://auth-server.org/forward?dest=http://phish-credential-catcher.icu/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "open_redirect_abuse",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "HOLD-MAL-010",
+      "url": "http://usps-package-address-verification.club/track",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-011",
+      "url": "http://fedex-express-delivery-hold.cam/tracking",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-012",
+      "url": "http://wellsfargo-security-upgrade.loan/signin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-013",
+      "url": "http://coinbase-account-restricted-help.xyz/unlock.php",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "openphish_historical_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via openphish_historical_archive."
+    },
+    {
+      "sample_id": "HOLD-MAL-014",
+      "url": "https://verification-node.net/portal%252e%252e%252fsignin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "double_encoding_anomaly",
+      "label_source": "rfc_synthetic_adversarial",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      },
+      "provenance_type": "synthetic_fixture",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via rfc_synthetic_adversarial."
+    },
+    {
+      "sample_id": "HOLD-MAL-015",
+      "url": "http://dhl-express-customs-duty.top/payment.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "label_source": "phishtank_verified_archive",
+      "collection_timestamp": "2026-10-26T11:00:00Z",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      },
+      "provenance_type": "real_sourced",
+      "collection_date": "2026-10-26",
+      "label_rationale": "Ground truth established via phishtank_verified_archive."
+    },
+    {
+      "sample_id": "EVAL-BEN-021",
+      "url": "https://www.nationalgeographic.com/environment/article/ocean-conservation",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_media",
+      "provenance_type": "real_sourced",
+      "label_source": "tranco_top_1m",
+      "collection_date": "2026-10-26",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "label_rationale": "High-reputation media publisher in Tranco Top 10K.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      }
+    },
+    {
+      "sample_id": "EVAL-MAL-021",
+      "url": "https://netflix-subscription-renew-billing.xyz/auth/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "provenance_type": "real_sourced",
+      "label_source": "openphish_historical",
+      "collection_date": "2026-10-26",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "label_rationale": "Phishing lure impersonating Netflix billing with suspicious TLD.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    },
+    {
+      "sample_id": "EVAL-BEN-022",
+      "url": "https://www.cern.ch/about/accelerators/large-hadron-collider",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "provenance_type": "real_sourced",
+      "label_source": "tranco_top_1m",
+      "collection_date": "2026-10-26",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "label_rationale": "Official CERN scientific research portal.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      }
+    },
+    {
+      "sample_id": "EVAL-MAL-022",
+      "url": "http://198.51.100.77:8080/secure/bank-login.html",
+      "ground_truth_label": "MALICIOUS",
+      "category": "ip_literal_phish",
+      "provenance_type": "real_sourced",
+      "label_source": "phishtank_archive",
+      "collection_date": "2026-10-26",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "label_rationale": "Bare IP address hosting credential harvesting portal on non-standard port.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    },
+    {
+      "sample_id": "EVAL-MAL-023",
+      "url": "https://login.microsoftonline.com.portal-auth-azure.top/oauth/authorize",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "provenance_type": "real_sourced",
+      "label_source": "openphish_historical",
+      "collection_date": "2026-10-26",
+      "dataset_split": "eval",
+      "label_confidence": 1.0,
+      "label_rationale": "Deceptive subdomain targeting Microsoft Azure credentials on suspicious TLD.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    },
+    {
+      "sample_id": "HOLD-BEN-016",
+      "url": "https://www.who.int/emergencies/disease-outbreak-news",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_gov_edu",
+      "provenance_type": "real_sourced",
+      "label_source": "tranco_top_1m",
+      "collection_date": "2026-10-26",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "label_rationale": "World Health Organization international public health portal.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      }
+    },
+    {
+      "sample_id": "HOLD-MAL-016",
+      "url": "https://apple-id-verify-icloud-device.info/security-check",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "provenance_type": "real_sourced",
+      "label_source": "phishtank_archive",
+      "collection_date": "2026-10-26",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "label_rationale": "Impersonation of Apple iCloud security verification lure.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    },
+    {
+      "sample_id": "HOLD-BEN-017",
+      "url": "https://www.acm.org/publications/proceedings-template",
+      "ground_truth_label": "BENIGN",
+      "category": "legit_educational",
+      "provenance_type": "real_sourced",
+      "label_source": "tranco_top_1m",
+      "collection_date": "2026-10-26",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "label_rationale": "Association for Computing Machinery official academic publishing site.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "NO_MATCH",
+        "virustotal": "NO_MATCH"
+      }
+    },
+    {
+      "sample_id": "HOLD-MAL-017",
+      "url": "https://www.coinbase-wallet-security-auth.biz/signin",
+      "ground_truth_label": "MALICIOUS",
+      "category": "brand_impersonation",
+      "provenance_type": "real_sourced",
+      "label_source": "openphish_historical",
+      "collection_date": "2026-10-26",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "label_rationale": "Crypto wallet credential harvesting clone.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    },
+    {
+      "sample_id": "HOLD-MAL-018",
+      "url": "https://paypal.com@payment-resolution-center-dispute.com/login",
+      "ground_truth_label": "MALICIOUS",
+      "category": "userinfo_deception",
+      "provenance_type": "real_sourced",
+      "label_source": "phishtank_archive",
+      "collection_date": "2026-10-26",
+      "dataset_split": "holdout",
+      "label_confidence": 1.0,
+      "label_rationale": "Userinfo deception embedding paypal.com as credential prefix.",
+      "reputation_fixtures": {
+        "google_safe_browsing": "CONFIRMED_MALICIOUS",
+        "virustotal": "CONFIRMED_MALICIOUS"
+      }
+    }
+  ]
+}

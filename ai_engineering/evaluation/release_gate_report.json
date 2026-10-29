@@ -1,0 +1,147 @@
+{
+  "timestamp": "2026-10-26T14:30:00Z",
+  "phase": "Phase 15: Detection Improvement and Explainable Risk Reports",
+  "checks": {
+    "url_dataset_hygiene": {
+      "status": "PASSED",
+      "summary": {
+        "dataset_id": "thelix-url-eval-v2",
+        "version": "2.0.0",
+        "total_samples": 110,
+        "split_distribution": {
+          "eval": 45,
+          "holdout": 35,
+          "tuning": 30
+        },
+        "label_distribution": {
+          "BENIGN": 54,
+          "MALICIOUS": 56
+        },
+        "provenance_distribution": {
+          "real_sourced": 93,
+          "synthetic_fixture": 17
+        },
+        "status": "VALID_AND_LEAKAGE_FREE"
+      }
+    },
+    "multimodal_dataset_hygiene": {
+      "status": "PASSED",
+      "summary": {
+        "dataset_id": "thelix-multimodal-eval-v2",
+        "version": "2.0.0",
+        "total_samples": 45,
+        "split_distribution": {
+          "eval": 18,
+          "holdout": 12,
+          "tuning": 15
+        },
+        "label_distribution": {
+          "MALICIOUS": 26,
+          "BENIGN": 15,
+          "INCONCLUSIVE_OR_FAILURE": 4
+        },
+        "provenance_distribution": {
+          "synthetic_fixture": 41,
+          "adversarial_synthetic": 4
+        },
+        "status": "VALID_AND_LEAKAGE_FREE"
+      }
+    },
+    "url_holdout_metrics": {
+      "status": "PASSED",
+      "samples": 35,
+      "precision": 1.0,
+      "precision_denominator": 18,
+      "precision_ci_95": [
+        0.8241,
+        1.0
+      ],
+      "recall": 1.0,
+      "recall_denominator": 18,
+      "recall_ci_95": [
+        0.8241,
+        1.0
+      ],
+      "false_positive_rate": 0.0,
+      "operational_accuracy": 1.0,
+      "coverage": 1.0,
+      "abstention_rate": 0.0
+    },
+    "multimodal_holdout_metrics": {
+      "status": "PASSED",
+      "samples": 12,
+      "precision": 1.0,
+      "precision_denominator": 6,
+      "precision_ci_95": [
+        0.6097,
+        1.0
+      ],
+      "recall": 1.0,
+      "recall_denominator": 6,
+      "recall_ci_95": [
+        0.6097,
+        1.0
+      ],
+      "false_positive_rate": 0.0,
+      "operational_accuracy": 1.0,
+      "coverage": 1.0,
+      "abstention_rate": 0.0,
+      "per_modality": {
+        "suspicious_message": {
+          "total": 4,
+          "correct": 4,
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "inconclusive": 0
+        },
+        "qr_code": {
+          "total": 3,
+          "correct": 3,
+          "tp": 1,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0,
+          "inconclusive": 1
+        },
+        "pdf_document": {
+          "total": 2,
+          "correct": 2,
+          "tp": 1,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0,
+          "inconclusive": 0
+        },
+        "screenshot": {
+          "total": 2,
+          "correct": 2,
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "inconclusive": 1
+        },
+        "adversarial_prompt_injection": {
+          "total": 1,
+          "correct": 1,
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "inconclusive": 0
+        }
+      }
+    }
+  },
+  "passed": true,
+  "provisional_thresholds": {
+    "url_min_precision": 0.95,
+    "url_min_recall": 0.9,
+    "url_max_fpr": 0.05,
+    "multimodal_min_precision": 0.9,
+    "multimodal_min_recall": 0.85,
+    "multimodal_max_fpr": 0.05
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "metadata": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.0",
+    "cpu_count_logical": 12,
+    "cpu_count_physical": 6,
+    "ram_total_gb": 15.27,
+    "initial_memory_rss_mb": 153.09,
+    "database_driver": "sqlite",
+    "timestamp_utc": "2026-10-27T10:21:27.548527+00:00"
+  },
+  "benchmark_execution": {
+    "total_duration_seconds": 2.63,
+    "memory_start_rss_mb": 153.07,
+    "memory_end_rss_mb": 162.25,
+    "memory_delta_mb": 9.18
+  },
+  "microbenchmarks": {
+    "algorithmic_stages": {
+      "iterations": 100,
+      "url_normalization": {
+        "min": 0.01,
+        "max": 0.13,
+        "mean": 0.01,
+        "p50": 0.01,
+        "p95": 0.02,
+        "p99": 0.04,
+        "stdev": 0.01
+      },
+      "static_url_analyzer": {
+        "min": 0.01,
+        "max": 0.08,
+        "mean": 0.02,
+        "p50": 0.02,
+        "p95": 0.03,
+        "p99": 0.07,
+        "stdev": 0.01
+      },
+      "scam_text_detector": {
+        "min": 0.09,
+        "max": 3.92,
+        "mean": 0.15,
+        "p50": 0.11,
+        "p95": 0.13,
+        "p99": 0.37,
+        "stdev": 0.38
+      },
+      "aggregation_and_scoring": {
+        "min": 0.0,
+        "max": 0.06,
+        "mean": 0.01,
+        "p50": 0.01,
+        "p95": 0.01,
+        "p99": 0.03,
+        "stdev": 0.01
+      }
+    },
+    "extraction_stages": {
+      "iterations": 30,
+      "screenshot_ocr_extraction": {
+        "min": 8.96,
+        "max": 13.31,
+        "mean": 10.35,
+        "p50": 10.17,
+        "p95": 12.16,
+        "p99": 13.01,
+        "stdev": 0.98
+      },
+      "qr_code_extraction": {
+        "min": 8.53,
+        "max": 15.31,
+        "mean": 9.6,
+        "p50": 9.32,
+        "p95": 10.73,
+        "p99": 14.05,
+        "stdev": 1.2
+      },
+      "pdf_document_extraction": {
+        "min": 0.41,
+        "max": 1.17,
+        "mean": 0.6,
+        "p50": 0.6,
+        "p95": 0.87,
+        "p99": 1.11,
+        "stdev": 0.16
+      }
+    }
+  },
+  "e2e_scans": {
+    "url_scan_instant_providers": {
+      "iterations": 50,
+      "simulated_provider_latency_ms": 0.0,
+      "external_calls_per_scan": 2,
+      "e2e_latency_ms": {
+        "min": 4.21,
+        "max": 25.99,
+        "mean": 5.45,
+        "p50": 4.99,
+        "p95": 6.25,
+        "p99": 16.37,
+        "stdev": 3.01
+      },
+      "db_queries_per_scan": {
+        "mean": 19.6,
+        "min": 18,
+        "max": 20
+      },
+      "db_duration_ms": {
+        "min": 0.24,
+        "max": 0.58,
+        "mean": 0.32,
+        "p50": 0.29,
+        "p95": 0.44,
+        "p99": 0.58,
+        "stdev": 0.07
+      },
+      "sample_query_breakdown": [
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.008
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.006
+        },
+        {
+          "statement": "INSERT INTO scans (id, user_id, input_type, raw_target, normalized_target, status, policy_version, engine_versions, crea",
+          "duration_ms": 0.017
+        },
+        {
+          "statement": "INSERT INTO audit_events (id, scan_id, user_id, event_type, details_json, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+          "duration_ms": 0.015
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.009
+        },
+        {
+          "statement": "UPDATE scans SET normalized_target=?, status=? WHERE scans.id = ?",
+          "duration_ms": 0.013
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.009
+        },
+        {
+          "statement": "UPDATE scans SET status=? WHERE scans.id = ?",
+          "duration_ms": 0.014
+        }
+      ]
+    },
+    "url_scan_simulated_network_providers": {
+      "iterations": 50,
+      "simulated_provider_latency_ms": 25.0,
+      "external_calls_per_scan": 2,
+      "e2e_latency_ms": {
+        "min": 4.0,
+        "max": 77.78,
+        "mean": 8.87,
+        "p50": 4.65,
+        "p95": 37.93,
+        "p99": 62.13,
+        "stdev": 13.65
+      },
+      "db_queries_per_scan": {
+        "mean": 19.6,
+        "min": 18,
+        "max": 20
+      },
+      "db_duration_ms": {
+        "min": 0.23,
+        "max": 0.48,
+        "mean": 0.3,
+        "p50": 0.28,
+        "p95": 0.4,
+        "p99": 0.44,
+        "stdev": 0.05
+      },
+      "sample_query_breakdown": [
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.009
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.006
+        },
+        {
+          "statement": "INSERT INTO scans (id, user_id, input_type, raw_target, normalized_target, status, policy_version, engine_versions, crea",
+          "duration_ms": 0.017
+        },
+        {
+          "statement": "INSERT INTO audit_events (id, scan_id, user_id, event_type, details_json, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+          "duration_ms": 0.016
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.009
+        },
+        {
+          "statement": "UPDATE scans SET normalized_target=?, status=? WHERE scans.id = ?",
+          "duration_ms": 0.013
+        },
+        {
+          "statement": "SELECT scans.id, scans.user_id, scans.input_type, scans.raw_target, scans.normalized_target, scans.status, scans.policy_",
+          "duration_ms": 0.008
+        },
+        {
+          "statement": "UPDATE scans SET status=? WHERE scans.id = ?",
+          "duration_ms": 0.012
+        }
+      ]
+    },
+    "multimodal_scans": {
+      "message": {
+        "iterations": 15,
+        "latency_ms": {
+          "min": 3.15,
+          "max": 5.41,
+          "mean": 3.99,
+          "p50": 3.85,
+          "p95": 5.06,
+          "p99": 5.34,
+          "stdev": 0.58
+        },
+        "db_queries_mean": 11.9
+      },
+      "screenshot": {
+        "iterations": 15,
+        "latency_ms": {
+          "min": 12.57,
+          "max": 15.88,
+          "mean": 13.97,
+          "p50": 13.81,
+          "p95": 15.84,
+          "p99": 15.87,
+          "stdev": 1.0
+        },
+        "db_queries_mean": 12
+      },
+      "qr": {
+        "iterations": 15,
+        "latency_ms": {
+          "min": 12.52,
+          "max": 15.78,
+          "mean": 14.07,
+          "p50": 14.07,
+          "p95": 15.61,
+          "p99": 15.75,
+          "stdev": 0.99
+        },
+        "db_queries_mean": 12
+      },
+      "pdf": {
+        "iterations": 15,
+        "latency_ms": {
+          "min": 2.98,
+          "max": 4.1,
+          "mean": 3.55,
+          "p50": 3.58,
+          "p95": 3.93,
+          "p99": 4.07,
+          "stdev": 0.31
+        },
+        "db_queries_mean": 12
+      }
+    }
+  },
+  "concurrency_throughput": {
+    "concurrency_1": {
+      "concurrency": 1,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "failures": 0,
+      "wall_time_seconds": 0.3,
+      "throughput_rps": 133.47,
+      "latencies_ms": {
+        "min": 3.93,
+        "max": 39.61,
+        "mean": 7.47,
+        "p50": 4.65,
+        "p95": 31.1,
+        "p99": 36.72,
+        "stdev": 8.7
+      }
+    },
+    "concurrency_5": {
+      "concurrency": 5,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "failures": 0,
+      "wall_time_seconds": 0.213,
+      "throughput_rps": 188.11,
+      "latencies_ms": {
+        "min": 11.47,
+        "max": 48.8,
+        "mean": 18.01,
+        "p50": 15.08,
+        "p95": 41.34,
+        "p99": 48.26,
+        "stdev": 9.09
+      }
+    },
+    "concurrency_10": {
+      "concurrency": 10,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "failures": 0,
+      "wall_time_seconds": 0.184,
+      "throughput_rps": 217.81,
+      "latencies_ms": {
+        "min": 14.69,
+        "max": 51.15,
+        "mean": 26.69,
+        "p50": 25.94,
+        "p95": 42.58,
+        "p99": 50.23,
+        "stdev": 7.09
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env.example/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch
+*.pth
+*.pt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# IDEs
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Databases & Test Caches
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+.pytest_cache/
+
+# Test Reports & Execution Logs
+*.log
+junit_report.xml
+pytest_*.txt
+pytest_*.log

@@ -1,0 +1,99 @@
+{
+  "phase": "Phase 4: Staging Readiness and Integration Certification",
+  "generated_at": "2026-10-27T18:15:00+05:30",
+  "execution_environment": {
+    "os": "Windows 10 Pro (x86_64)",
+    "python_version": "3.11.0",
+    "sqlalchemy_version": "2.0.44",
+    "psycopg2_version": "2.9.11 (psycopg2-binary)",
+    "opencv_version": "4.13.0",
+    "pypdf_version": "6.21.2",
+    "google_genai_version": "2.0.0",
+    "database_mode": "SQLite in-memory (Local verification)",
+    "test_database_url_configured": false,
+    "gemini_api_key_configured": true,
+    "safe_browsing_api_key_configured": false,
+    "virustotal_api_key_configured": false,
+    "ollama_port_11434_listening": true,
+    "ollama_models_installed": ["llama3.2:latest"],
+    "tesseract_binary_on_path": false
+  },
+  "overall_test_metrics": {
+    "total_tests": 342,
+    "passed": 339,
+    "skipped": 3,
+    "failed": 0,
+    "warnings": 27,
+    "overall_pass_rate_percent": 99.12,
+    "reproducible_defects": 0
+  },
+  "skipped_tests_audit": [
+    {
+      "test_name": "tests/test_staging_validation.py::test_postgres_multiprocess_staging_harness",
+      "gate": "Workstream A: PostgreSQL Staging Gate",
+      "reason": "TEST_DATABASE_URL is not set. Skipped cleanly to protect against executing tests without a designated database.",
+      "prerequisite_for_unblock": "Export TEST_DATABASE_URL='postgresql://user:password@host:port/disposable_db'"
+    },
+    {
+      "test_name": "tests/test_postgres_concurrency_and_staging.py::test_postgres_staging_harness_contract",
+      "gate": "Workstream A: PostgreSQL Staging Gate",
+      "reason": "TEST_DATABASE_URL is not set. Dialect and driver verification skipped pending staging deployment.",
+      "prerequisite_for_unblock": "Dedicated staging PostgreSQL instance accessible over TLS."
+    },
+    {
+      "test_name": "tests/test_postgres_concurrency_and_staging.py::test_postgres_staging_migration_with_contention_and_duplicates",
+      "gate": "Workstream A: PostgreSQL Migration Destructive Gate",
+      "reason": "Destructive test drops tables (scans, user_daily_quotas, quota_refund_records). Safety policy prohibits execution until dedicated disposable database identity is confirmed.",
+      "prerequisite_for_unblock": "Isolated disposable PostgreSQL database with confirmed non-production tenant isolation."
+    }
+  ],
+  "workstream_results": {
+    "workstream_a_postgresql": {
+      "status": "BLOCKED",
+      "driver_check": "PASS (psycopg2-binary 2.9.11 registered)",
+      "url_scheme_validation": "PASS (postgresql:// parsed securely with pool_pre_ping=True)",
+      "destructive_safety_audit": "PASS (Destructive DROP TABLE IF EXISTS verified; withheld per safety rule)",
+      "local_concurrency_semantics": "PASS (19 tests passed in test_postgres_concurrency_and_staging.py)",
+      "staging_live_execution": "BLOCKED (TEST_DATABASE_URL unset)"
+    },
+    "workstream_b_ocr": {
+      "status": "PARTIAL",
+      "tesseract_discovery": "BLOCKED (Not on PATH; automated winget install requires interactive elevation)",
+      "opencv_pipeline": "PASS (Grayscale, Otsu thresholding, blur variance, contrast metrics operational)",
+      "fallback_provenance": "PASS (LIMITATION-TESSERACT-BINARY-NOT-CONFIGURED correctly attached; no false safe)"
+    },
+    "workstream_c_providers": {
+      "status": "PARTIAL",
+      "google_gemini": {
+        "status": "PASS",
+        "live_authenticated_test": "SUCCESS",
+        "model_used": "gemini-3.5-flash-lite",
+        "measured_latency_ms": 9528,
+        "sample_output": "Hello! Security testing systems online and operati",
+        "timeout_fallback_verified": true
+      },
+      "google_safe_browsing": {
+        "status": "PARTIAL",
+        "live_credentials": "UNAVAILABLE (Key unset)",
+        "mock_resilience_test": "PASS (Timeouts, backoff, and privacy sanitization verified)"
+      },
+      "virustotal": {
+        "status": "PARTIAL",
+        "live_credentials": "UNAVAILABLE (Key unset)",
+        "mock_resilience_test": "PASS (Rate limit 429, URL identifier encoding verified)"
+      },
+      "local_ollama_gemma": {
+        "status": "BLOCKED",
+        "daemon_status": "RUNNING on port 11434",
+        "installed_models": ["llama3.2:latest"],
+        "required_model": "gemma:2b / gemma-2b-v3 (NOT INSTALLED)"
+      }
+    },
+    "workstream_d_deployment": {
+      "status": "PARTIAL",
+      "rate_limiter": "PARTIAL (In-memory sliding window operational; multi-worker requires Redis)",
+      "async_tasks": "PARTIAL (In-process asyncio operational; reconciliation operational; durable recovery requires Celery/ARQ)",
+      "sandbox_disabled_invariant": "PASS (SAFE_LOCAL_SANDBOX_ENABLED=False enforced)"
+    }
+  }
+}
