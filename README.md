@@ -241,6 +241,37 @@ Serve `frontend/dist` with any static file server or integrate with the FastAPI 
 
 ---
 
+## Deployment Guide
+
+### 1. Frontend Deployment (Vercel)
+The frontend is a single-page React + TypeScript application located under `/frontend`.
+
+- **Framework Preset**: Vite
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build` (or `tsc -b && vite build`)
+- **Output Directory**: `dist`
+- **Install Command**: `npm install`
+- **Environment Variables**:
+  - `VITE_API_BASE_URL`: The public HTTPS URL of your deployed backend service (e.g., `https://api.thelix.ai`). If left empty, requests default to relative paths for same-domain proxy setups.
+- **Routing**: Handled via `frontend/vercel.json` SPA catch-all rewrites (`/(.*) -> /index.html`).
+
+### 2. Backend Deployment (Docker / VPS / Cloud Run / Railway / Render)
+The backend is an asynchronous FastAPI service requiring Python 3.11+, OpenCV, and optional Tesseract OCR libraries.
+
+- **Dockerfile**: Provided at project root (`./Dockerfile`) with hardened non-root user execution (`useradd -m -u 1000 thelix`).
+- **Production Startup**: `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+- **Environment Variables for Production**:
+  - `ENVIRONMENT=production`
+  - `DATABASE_URL=postgresql://user:password@host:5432/thelix_db`
+  - `ALLOWED_ORIGINS=https://your-frontend-deployment.vercel.app` (Wildcard `*` is strictly blocked in production)
+  - `SECRET_KEY=<generate-secure-32-char-random-key>`
+  - `INTERNAL_SERVICE_TOKEN=<generate-secure-16-char-random-token>`
+  - `SUPABASE_JWT_SECRET=<supabase-jwt-secret>`
+  - `RATE_LIMIT_STORE=redis` & `REDIS_URL=redis://...` (for distributed deployments)
+  - Optional Threat Feeds: `VIRUSTOTAL_API_KEY`, `SAFE_BROWSING_API_KEY`, `GEMINI_API_KEY`
+
+---
+
 ## Safe Deployment Guidance
 
 - Set `ENVIRONMENT=production` or `ENVIRONMENT=pilot`

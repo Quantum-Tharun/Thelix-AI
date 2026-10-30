@@ -46,20 +46,43 @@ export const TrustScoreCard: React.FC<TrustScoreCardProps> = ({ report, onClear 
     (report.trust_score >= 70 && hasHighSeverityFindings) ||
     (report.trust_score <= 30 && !hasFindings && report.risk_score <= 20);
 
-  // Format checks data safely if array contains strings or objects
+  // Human-readable labels for backend check codes
+  const CHECK_LABELS: Record<string, string> = {
+    input_validation: 'Input Validation',
+    static_analysis: 'Static URL Analysis',
+    url_normalization: 'URL Canonical Normalization',
+    qr_decode: 'QR Code Payload Extraction',
+    ocr_extraction: 'OCR Text Extraction',
+    scam_nlp: 'NLP Scam Language Detection',
+    deepfake_vision: 'Deepfake Vision Analysis',
+    sandbox_execution: 'Isolated Sandbox Execution',
+    external_threat_intelligence: 'External Threat Intelligence',
+    isolated_sandbox: 'Isolated Execution Sandbox',
+    capability_limitation: 'Capability Limitation Notice',
+  };
+
+  // Format `what_we_checked` items
   const formatCheckItem = (item: Record<string, unknown> | string, index: number) => {
     if (typeof item === 'string') {
-      return {
-        id: `check-${index}`,
-        title: item,
-        status: 'passed',
-        detail: 'Validated by deterministic rule engine',
-      };
+      return { id: `check-${index}`, title: item, status: 'passed', detail: '' };
     }
-    const title = (item.check_name || item.name || item.title || item.indicator || `Check #${index + 1}`) as string;
-    const status = (item.status || item.result || (item.flagged ? 'flagged' : 'passed')) as string;
+    const code = (item.check || item.check_name || item.name || item.title || item.indicator || '') as string;
+    const title = CHECK_LABELS[code] || code.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) || `Check #${index + 1}`;
+    const rawStatus = (item.status || item.result || (item.flagged ? 'flagged' : 'passed')) as string;
+    // Normalise backend's 'completed' to 'passed' for display
+    const status = rawStatus === 'completed' ? 'passed' : rawStatus;
     const detail = (item.reason || item.detail || item.description || '') as string;
     return { id: `check-${index}`, title, status, detail };
+  };
+
+  // Format `what_we_could_not_check` items
+  const formatSkippedItem = (item: Record<string, unknown> | string, index: number) => {
+    if (typeof item === 'string') return { id: `skip-${index}`, title: item, reason: '', status: 'skipped' };
+    const code = (item.check || item.name || item.title || '') as string;
+    const title = CHECK_LABELS[code] || code.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) || `Item #${index + 1}`;
+    const reason = (item.reason || item.detail || item.description || '') as string;
+    const status = (item.status || 'skipped') as string;
+    return { id: `skip-${index}`, title, reason, status };
   };
 
   return (
@@ -241,17 +264,28 @@ export const TrustScoreCard: React.FC<TrustScoreCardProps> = ({ report, onClear 
           {report.what_we_could_not_check && report.what_we_could_not_check.length > 0 && (
             <div className="checks-group-card skipped-group">
               <h4 className="checks-subheading skipped">Omitted or Unavailable Inspections</h4>
-              <ul className="skipped-checks-list">
-                {report.what_we_could_not_check.map((item, idx) => {
-                  const title = typeof item === 'string' ? item : String((item as Record<string, unknown>).name || (item as Record<string, unknown>).title || JSON.stringify(item));
-                  return (
-                    <li key={idx} className="skipped-check-item">
-                      <span className="skipped-dot"></span>
-                      <span>{title}</span>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="skipped-checks-list">
+                {report.what_we_could_not_check
+                  .map((item, idx) => formatSkippedItem(item as Record<string, unknown> | string, idx))
+                  // Deduplicate: hide 'capability_limitation' if the actual skipped check already shown
+                  .filter((sk, _, arr) => {
+                    if (sk.title === 'Capability Limitation Notice') {
+                      // Only show if there's no other entry with the same reason root
+                      const rootCheck = sk.reason.match(/Check '([^']+)'/)?.[1];
+                      return !rootCheck || !arr.some((other) => other.id !== sk.id && other.title !== 'Capability Limitation Notice' && sk.reason.includes(rootCheck));
+                    }
+                    return true;
+                  })
+                  .map((sk) => (
+                    <div key={sk.id} className="skipped-check-item">
+                      <span className={`skipped-status-dot ${sk.status}`}></span>
+                      <div className="skipped-check-text">
+                        <span className="skipped-check-name">{sk.title}</span>
+                        {sk.reason && <span className="skipped-check-reason">{sk.reason}</span>}
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           )}
         </div>

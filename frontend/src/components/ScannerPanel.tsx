@@ -25,8 +25,11 @@ export const ScannerPanel: React.FC<ScannerPanelProps> = ({
 
   useEffect(() => {
     if (prefillContent) {
-      setContentInput(prefillContent);
-      setActiveMode('url_text');
+      // Schedule state synchronization to prevent cascading re-render warnings
+      queueMicrotask(() => {
+        setContentInput(prefillContent);
+        setActiveMode('url_text');
+      });
     }
   }, [prefillContent]);
 

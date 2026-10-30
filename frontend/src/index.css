@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import './App.css';
 
 :root {
   /* Brand Color Palette */
@@ -6,6 +7,7 @@
   --thelix-surface-1: #171a15;
   --thelix-surface-2: #21251e;
   --thelix-surface-3: #2c3228;
+  --thelix-panel: #171a15;
   --thelix-border: #31372b;
   --thelix-border-light: #444c3c;
 
@@ -24,6 +26,9 @@
   --thelix-danger: #c75647;
   --thelix-danger-glow: rgba(199, 86, 71, 0.2);
 
+  --border-radius-card: 12px;
+  --border-radius-subtle: 8px;
+
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 
@@ -34,6 +39,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  background-color: var(--thelix-black);
+  color: var(--thelix-cream);
+  min-height: 100vh;
 }
 
 body {

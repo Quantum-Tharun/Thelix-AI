@@ -53,9 +53,40 @@ function App() {
   }, []);
 
   useEffect(() => {
-    loadHealth();
-    loadScans();
-  }, [loadHealth, loadScans]);
+    let ignore = false;
+
+    async function initializeDashboard() {
+      setLoadingHealth(true);
+      setLoadingScans(true);
+      try {
+        const [healthRes, scansRes] = await Promise.allSettled([
+          checkHealth(),
+          fetchRecentScans(),
+        ]);
+        if (!ignore) {
+          if (healthRes.status === 'fulfilled') {
+            setHealth(healthRes.value);
+          } else {
+            setHealth(null);
+          }
+          if (scansRes.status === 'fulfilled') {
+            setRecentScans(scansRes.value);
+          }
+        }
+      } finally {
+        if (!ignore) {
+          setLoadingHealth(false);
+          setLoadingScans(false);
+        }
+      }
+    }
+
+    initializeDashboard();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleRunAnalysis = async (params: AnalyzeParams) => {
     setAnalyzing(true);
